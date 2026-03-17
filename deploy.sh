@@ -44,7 +44,7 @@ echo "==> Triggering Railway redeploy on service $SERVICE_ID..."
 RESULT=$(curl -s -X POST https://backboard.railway.app/graphql/v2 \
   -H "Authorization: Bearer $RAILWAY_TOKEN" \
   -H "Content-Type: application/json" \
-  -d "{\"query\":\"mutation { serviceInstanceDeploy(serviceId: \\\"$SERVICE_ID\\\", environmentId: \\\"$DEPLOY_ENV_ID\\\") }\"}")
+  -d "{\"query\":\"mutation { serviceInstanceDeploy(serviceId: \\\"$SERVICE_ID\\\", environmentId: \\\"$DEPLOY_ENV_ID\\\", latestCommit: true) }\"}")
 
 echo "  Trigger result: $RESULT"
 
