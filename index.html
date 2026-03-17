@@ -1249,7 +1249,6 @@
     </div>
 
     <div class="sidebar-footer">
-      <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Perplexity Computer</a>
       <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
         <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
@@ -1359,7 +1358,7 @@
         </div>
         <span class="row-count" id="events-count"></span>
         <label class="toggle-check" id="event-action-details-toggle">
-          <input type="checkbox" id="show-event-action-details" onchange="renderEventsTable()" />
+          <input type="checkbox" id="show-event-action-details" onchange="onToggleEventActionDetails()" />
           <span class="toggle-check-box"></span>
           Show Action Details
         </label>
@@ -1415,7 +1414,7 @@
         </div>
         <span class="row-count" id="all-titles-count"></span>
         <label class="toggle-check">
-          <input type="checkbox" id="show-all-titles-action-details" onchange="renderAllTitlesTable()" />
+          <input type="checkbox" id="show-all-titles-action-details" onchange="onToggleAllTitlesActionDetails()" />
           <span class="toggle-check-box"></span>
           Show Action Details
         </label>
@@ -1478,7 +1477,7 @@
         </div>
         <span class="row-count" id="ate-count"></span>
         <label class="toggle-check">
-          <input type="checkbox" id="show-ate-action-details" onchange="renderAllTitleEventsTable()" />
+          <input type="checkbox" id="show-ate-action-details" onchange="onToggleAteActionDetails()" />
           <span class="toggle-check-box"></span>
           Show Action Details
         </label>
@@ -1539,7 +1538,7 @@
           <input class="search-input" id="search-titles" type="text" placeholder="Search job titles…" oninput="filterTitles()" />
         </div>
         <label class="toggle-check" id="action-details-toggle">
-          <input type="checkbox" id="show-action-details" onchange="renderTitlesTable()" />
+          <input type="checkbox" id="show-action-details" onchange="onToggleTitleActionDetails()" />
           <span class="toggle-check-box"></span>
           Show Action Details
         </label>
@@ -1904,16 +1903,109 @@ function initDashboard() {
   renderEventsTable();
 }
 
-function getAllActionTypes() {
-  const actionSet = new Set();
-  Object.values(DB).forEach(titles => {
-    Object.values(titles).forEach(tdata => {
-      Object.values(tdata.users).forEach(u => {
-        Object.keys(u.actions).forEach(a => actionSet.add(a));
-      });
+// ── Action counts cache (keyed by event name, or '__all__' for global) ──────
+const ACTION_COUNTS_CACHE = {};
+
+async function fetchEventActionCounts(eventName) {
+  if (ACTION_COUNTS_CACHE[eventName]) return ACTION_COUNTS_CACHE[eventName];
+  const data = await apiFetch(`/api/data/events/${encodeURIComponent(eventName)}/action-counts`);
+  ACTION_COUNTS_CACHE[eventName] = data;
+  return data;
+}
+
+async function fetchAllEventActionCounts() {
+  // Fetch action counts for all events in parallel, cache each
+  const eventNames = Object.keys(DB);
+  await Promise.allSettled(
+    eventNames.map(name => fetchEventActionCounts(name))
+  );
+}
+
+async function fetchTitleActionCounts(eventName, titleName) {
+  const key = `${eventName}|||${titleName}`;
+  if (ACTION_COUNTS_CACHE[key]) return ACTION_COUNTS_CACHE[key];
+  const data = await apiFetch(`/api/data/events/${encodeURIComponent(eventName)}/titles/${encodeURIComponent(titleName)}/action-counts`);
+  ACTION_COUNTS_CACHE[key] = data;
+  return data;
+}
+
+async function fetchAllTitlesActionCounts() {
+  // Fetch per-title action counts rolled up across all events
+  const key = '__all_titles__';
+  if (ACTION_COUNTS_CACHE[key]) return ACTION_COUNTS_CACHE[key];
+  // Aggregate from per-event title action counts
+  const titleMap = {};
+  const eventNames = Object.keys(DB);
+  const results = await Promise.allSettled(
+    eventNames.map(evName =>
+      Object.keys(DB[evName]).map(titleName =>
+        fetchTitleActionCounts(evName, titleName).then(counts => ({ titleName, counts }))
+      )
+    ).flat()
+  );
+  results.forEach(r => {
+    if (r.status !== 'fulfilled') return;
+    const { titleName, counts } = r.value;
+    if (!titleMap[titleName]) titleMap[titleName] = {};
+    Object.entries(counts).forEach(([a, c]) => {
+      titleMap[titleName][a] = (titleMap[titleName][a] || 0) + c;
     });
   });
+  ACTION_COUNTS_CACHE[key] = titleMap;
+  return titleMap;
+}
+
+function getAllActionTypes() {
+  // Derive from cached action counts rather than lazy-loaded user data
+  const actionSet = new Set();
+  Object.values(ACTION_COUNTS_CACHE).forEach(counts => {
+    if (typeof counts === 'object' && counts !== null) {
+      // could be flat {action: count} or nested {title: {action: count}}
+      Object.keys(counts).forEach(k => {
+        if (typeof counts[k] === 'object') {
+          Object.keys(counts[k]).forEach(a => actionSet.add(a));
+        } else {
+          actionSet.add(k);
+        }
+      });
+    }
+  });
+  // Fallback to chart data action list which is always loaded
+  if (actionSet.size === 0 && window._CHART_RAW && window._CHART_RAW.actions) {
+    window._CHART_RAW.actions.forEach(a => actionSet.add(a));
+  }
   return Array.from(actionSet).sort();
+}
+
+// ── Async checkbox toggle handlers ──────────────────────────────────────────
+async function onToggleEventActionDetails() {
+  const cb = document.getElementById('show-event-action-details');
+  if (cb.checked) await fetchAllEventActionCounts();
+  renderEventsTable();
+}
+async function onToggleTitleActionDetails() {
+  const cb = document.getElementById('show-action-details');
+  if (cb.checked && selectedEvent) {
+    // Fetch per-title action counts for selected event
+    await Promise.allSettled(
+      Object.keys(DB[selectedEvent] || {}).map(t => fetchTitleActionCounts(selectedEvent, t))
+    );
+  }
+  renderTitlesTable();
+}
+async function onToggleAllTitlesActionDetails() {
+  const cb = document.getElementById('show-all-titles-action-details');
+  if (cb.checked) await fetchAllTitlesActionCounts();
+  renderAllTitlesTable();
+}
+async function onToggleAteActionDetails() {
+  const cb = document.getElementById('show-ate-action-details');
+  if (cb.checked && selectedTitle) {
+    await apiFetch(`/api/data/titles/${encodeURIComponent(selectedTitle)}/action-counts`)
+      .then(d => { ACTION_COUNTS_CACHE[`__ate__${selectedTitle}`] = d; })
+      .catch(() => {});
+  }
+  renderAllTitleEventsTable();
 }
 
 function getEventRows() {
@@ -1921,15 +2013,8 @@ function getEventRows() {
     const titleArr = Object.values(titles);
     const users   = titleArr.reduce((s, t) => s + t.unique_users, 0);
     const actions = titleArr.reduce((s, t) => s + t.total_actions, 0);
-    // Aggregate per-action counts across all titles and users for this event
-    const actionCounts = {};
-    titleArr.forEach(t => {
-      Object.values(t.users).forEach(u => {
-        Object.entries(u.actions).forEach(([a, c]) => {
-          actionCounts[a] = (actionCounts[a] || 0) + c;
-        });
-      });
-    });
+    // Use cached API action counts (populated when Show Action Details is checked)
+    const actionCounts = ACTION_COUNTS_CACHE[name] || {};
     return { name, users, actions, titleCount: titleArr.length, actionCounts };
   });
 }
@@ -2019,19 +2104,15 @@ function goAllTitles() {
 }
 
 function getAllTitleRows() {
-  // Roll up all events by title
+  // Roll up all events by title; use cached API action counts
   const map = {};
+  const cachedTitleMap = ACTION_COUNTS_CACHE['__all_titles__'] || {};
   Object.entries(DB).forEach(([evName, titles]) => {
     Object.entries(titles).forEach(([tName, tdata]) => {
-      if (!map[tName]) map[tName] = { name: tName, events: 0, users: 0, actions: 0, actionCounts: {} };
+      if (!map[tName]) map[tName] = { name: tName, events: 0, users: 0, actions: 0, actionCounts: cachedTitleMap[tName] || {} };
       map[tName].events  += 1;
       map[tName].users   += tdata.unique_users;
       map[tName].actions += tdata.total_actions;
-      Object.values(tdata.users).forEach(u => {
-        Object.entries(u.actions).forEach(([a, c]) => {
-          map[tName].actionCounts[a] = (map[tName].actionCounts[a] || 0) + c;
-        });
-      });
     });
   });
   return Object.values(map);
@@ -2131,12 +2212,9 @@ function goAllTitleEvents() {
   Object.entries(DB).forEach(([evName, titles]) => {
     if (!titles[selectedAllTitle]) return;
     const tdata = titles[selectedAllTitle];
-    const actionCounts = {};
-    Object.values(tdata.users).forEach(u => {
-      Object.entries(u.actions).forEach(([a, c]) => {
-        actionCounts[a] = (actionCounts[a] || 0) + c;
-      });
-    });
+    // Use cached API action counts
+    const key = `${evName}|||${selectedAllTitle}`;
+    const actionCounts = ACTION_COUNTS_CACHE[key] || {};
     rows.push({ name: evName, users: tdata.unique_users, actions: tdata.total_actions, actionCounts });
   });
 
@@ -2158,10 +2236,16 @@ function renderAllTitleEventsTable() {
   rows = sortRows(rows, ateSort.col, ateSort.dir);
 
   const showDetails = document.getElementById('show-ate-action-details').checked;
-  // Only show action types present for this title
+  // Only show action types present for this title (from cache or chart fallback)
   const actionTypes = showDetails ? (() => {
     const s = new Set();
-    (window._ateRows || []).forEach(r => Object.keys(r.actionCounts).forEach(a => s.add(a)));
+    // From per-event cached counts for this title
+    Object.keys(DB).forEach(evName => {
+      const key = `${evName}|||${selectedAllTitle}`;
+      Object.keys(ACTION_COUNTS_CACHE[key] || {}).forEach(a => s.add(a));
+    });
+    // Fallback to chart actions if nothing cached yet
+    if (s.size === 0 && window._CHART_RAW) (window._CHART_RAW.actions || []).forEach(a => s.add(a));
     return Array.from(s).sort();
   })() : [];
   const colCount = 4 + actionTypes.length;
@@ -2295,25 +2379,26 @@ function goToTitles() {
 // Returns the sorted list of action types present in the selected event
 function getEventActionTypes() {
   if (!selectedEvent) return [];
+  // Use cached API data
   const actionSet = new Set();
-  Object.values(DB[selectedEvent]).forEach(tdata => {
-    Object.values(tdata.users).forEach(u => {
-      Object.keys(u.actions).forEach(a => actionSet.add(a));
-    });
+  Object.keys(DB[selectedEvent] || {}).forEach(titleName => {
+    const key = `${selectedEvent}|||${titleName}`;
+    const counts = ACTION_COUNTS_CACHE[key] || {};
+    Object.keys(counts).forEach(a => actionSet.add(a));
   });
+  // Fallback to chart actions
+  if (actionSet.size === 0 && window._CHART_RAW) {
+    (window._CHART_RAW.actions || []).forEach(a => actionSet.add(a));
+  }
   return Array.from(actionSet).sort();
 }
 
 function getTitleRows() {
   if (!selectedEvent) return [];
   return Object.entries(DB[selectedEvent]).map(([t, v]) => {
-    // Aggregate per-action counts across all users for this title
-    const actionCounts = {};
-    Object.values(v.users).forEach(u => {
-      Object.entries(u.actions).forEach(([a, c]) => {
-        actionCounts[a] = (actionCounts[a] || 0) + c;
-      });
-    });
+    // Use cached API action counts
+    const key = `${selectedEvent}|||${t}`;
+    const actionCounts = ACTION_COUNTS_CACHE[key] || {};
     return {
       name: t, users: v.unique_users, actions: v.total_actions,
       userCount: Object.keys(v.users).length,
@@ -2745,7 +2830,7 @@ function updateNav(active) {
     </div>
     <div>
       <div class="chat-header-title">Ask about the data</div>
-      <div class="chat-header-sub">Powered by Claude AI · 2025 data</div>
+      <div class="chat-header-sub">2025 data</div>
     </div>
     <button class="chat-close" onclick="toggleChat()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
