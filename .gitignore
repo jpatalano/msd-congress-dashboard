@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+*.pyo
+.env
+index_backup.html
+data_v2.json

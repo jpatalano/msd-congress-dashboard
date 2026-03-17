@@ -1,0 +1,365 @@
+=== MSD CONGRESS ACTIVITY DASHBOARD — DATA SUMMARY ===
+Total events: 91
+Total unique job titles across all events: 1066
+
+## TOP 20 EVENTS BY TOTAL ACTIONS
+  ASCO 2025: 28,874 actions, 842 users, 468 titles
+  ESMO 2025: 23,290 actions, 844 users, 500 titles
+  ASH 2025: 7,945 actions, 128 users, 97 titles
+  ASCO GU 2025: 6,124 actions, 157 users, 117 titles
+  JP Morgan Healthcare Conference 2025: 5,002 actions, 112 users, 83 titles
+  WCLC 2025: 2,945 actions, 116 users, 82 titles
+  SABCS 2025: 2,674 actions, 114 users, 90 titles
+  SGO 2025: 2,581 actions, 104 users, 83 titles
+  ASCO GI 2025: 2,539 actions, 95 users, 77 titles
+  AHA 2025: 2,392 actions, 145 users, 106 titles
+  AACR 2025: 2,089 actions, 126 users, 86 titles
+  ACC 2025: 1,809 actions, 103 users, 78 titles
+  ERS 2025: 1,707 actions, 110 users, 83 titles
+  EHA 2025: 1,429 actions, 57 users, 46 titles
+  ECCO 2025: 1,203 actions, 59 users, 55 titles
+  ESC 2025: 1,075 actions, 75 users, 61 titles
+  ATS 2025: 1,059 actions, 55 users, 44 titles
+  DDW 2025: 1,030 actions, 49 users, 42 titles
+  ID WEEK 2025: 1,030 actions, 75 users, 51 titles
+  AUA 2025: 982 actions, 32 users, 25 titles
+
+## ALL EVENTS (alphabetical) — actions / users / titles
+  AACR 2025: 2,089 actions | 126 users | 86 job titles
+  AAO 2025: 15 actions | 1 users | 1 job titles
+  AAO-HNSF 2025 Annual Meeting & OTO EXPO: 12 actions | 2 users | 2 job titles
+  AAP 2025: 4 actions | 1 users | 1 job titles
+  ACC 2025: 1,809 actions | 103 users | 78 job titles
+  ACG 2025: 314 actions | 15 users | 10 job titles
+  ACR 2025: 875 actions | 44 users | 32 job titles
+  ACTHIV 2025: 156 actions | 7 users | 6 job titles
+  ADA 2025: 30 actions | 7 users | 6 job titles
+  AHA 2025: 2,392 actions | 145 users | 106 job titles
+  AHNS (COSM) 2025: 28 actions | 3 users | 3 job titles
+  AIBD 2025: 592 actions | 27 users | 21 job titles
+  AMP 2025: 110 actions | 5 users | 5 job titles
+  APACC 2025: 4 actions | 1 users | 1 job titles
+  ASCO 2025: 28,874 actions | 842 users | 468 job titles
+  ASCO GI 2025: 2,539 actions | 95 users | 77 job titles
+  ASCO GU 2025: 6,124 actions | 157 users | 117 job titles
+  ASH 2025: 7,945 actions | 128 users | 97 job titles
+  ASTCT/CIBMTR 2025: 3 actions | 1 users | 1 job titles
+  ASTMH 2025: 64 actions | 7 users | 6 job titles
+  ASTRO 2025: 48 actions | 4 users | 4 job titles
+  ATS 2025: 1,059 actions | 55 users | 44 job titles
+  AUA 2025: 982 actions | 32 users | 25 job titles
+  CAP 2025: 25 actions | 4 users | 4 job titles
+  CHEST 2025: 304 actions | 29 users | 21 job titles
+  CROI 2025: 297 actions | 42 users | 36 job titles
+  Crohn's & Colitis 2025: 230 actions | 10 users | 7 job titles
+  DDW 2025: 1,030 actions | 49 users | 42 job titles
+  EACS 2025: 379 actions | 49 users | 36 job titles
+  EADO 2025: 35 actions | 6 users | 5 job titles
+  EADV 2025: 208 actions | 13 users | 12 job titles
+  EASL 2025: 11 actions | 2 users | 2 job titles
+  EAU 2025: 523 actions | 26 users | 19 job titles
+  EBMT 2025: 21 actions | 3 users | 3 job titles
+  ECCO 2025: 1,203 actions | 59 users | 55 job titles
+  ECHNO 2025: 78 actions | 7 users | 7 job titles
+  ECP 2025: 179 actions | 13 users | 12 job titles
+  EHA 2025: 1,429 actions | 57 users | 46 job titles
+  EIKCS 2025: 8 actions | 3 users | 3 job titles
+  ELCC 2025: 871 actions | 42 users | 35 job titles
+  ERS 2025: 1,707 actions | 110 users | 83 job titles
+  ESC 2025: 1,075 actions | 75 users | 61 job titles
+  ESCMID 2025: 850 actions | 65 users | 51 job titles
+  ESGO 2025: 586 actions | 28 users | 26 job titles
+  ESICM 2025: 3 actions | 1 users | 1 job titles
+  ESMO 2025: 23,290 actions | 844 users | 500 job titles
+  ESMO Asia 2025: 61 actions | 9 users | 8 job titles
+  ESMO Breast 2025: 158 actions | 20 users | 20 job titles
+  ESMO GI 2025: 117 actions | 11 users | 9 job titles
+  ESMO Gyn 2025: 25 actions | 7 users | 7 job titles
+  ESPID 2025: 552 actions | 41 users | 27 job titles
+  ESTRO 2025: 163 actions | 6 users | 6 job titles
+  ESTS 2025: 195 actions | 4 users | 4 job titles
+  EULAR 2025: 460 actions | 25 users | 24 job titles
+  EUROGIN 2025: 119 actions | 13 users | 13 job titles
+  GAWC 2025: 1 actions | 1 users | 1 job titles
+  HCC 2025: 3 actions | 1 users | 1 job titles
+  HOPA 2025: 3 actions | 2 users | 2 job titles
+  HSFA 2025: 89 actions | 16 users | 7 job titles
+  IAOO 2025: 17 actions | 1 users | 1 job titles
+  IAS 2025: 130 actions | 20 users | 17 job titles
+  IASLC-TTLC 2025: 398 actions | 22 users | 14 job titles
+  ICML 2025: 415 actions | 24 users | 20 job titles
+  ID WEEK 2025: 1,030 actions | 75 users | 51 job titles
+  IGCS 2025: 78 actions | 11 users | 11 job titles
+  IKCS 2025: 221 actions | 11 users | 7 job titles
+  IPVS 2025: 142 actions | 10 users | 10 job titles
+  ISHLT 2025: 165 actions | 14 users | 11 job titles
+  ISPOR Europe 2025: 30 actions | 3 users | 3 job titles
+  JP Morgan Healthcare Conference 2025: 5,002 actions | 112 users | 83 job titles
+  MBCC 2025: 13 actions | 3 users | 3 job titles
+  ONS 2025: 6 actions | 1 users | 1 job titles
+  PHPN 2025: 63 actions | 6 users | 6 job titles
+  PVRI 2025: 149 actions | 21 users | 18 job titles
+  SABCS 2025: 2,674 actions | 114 users | 90 job titles
+  SEATS 2025: 1 actions | 1 users | 1 job titles
+  SGBCC 2025: 128 actions | 11 users | 11 job titles
+  SGO 2025: 2,581 actions | 104 users | 83 job titles
+  SITC 2025: 6 actions | 3 users | 3 job titles
+  SLIPE 2025: 9 actions | 2 users | 2 job titles
+  SSO 2025: 10 actions | 3 users | 3 job titles
+  STS 2025: 27 actions | 4 users | 4 job titles
+  SUO 2025: 467 actions | 21 users | 16 job titles
+  THNO 2025: 8 actions | 2 users | 2 job titles
+  TUFTS 2025 - 22nd Annual Update in Pulmonary Hypertension: 7 actions | 1 users | 1 job titles
+  UEGW 2025: 892 actions | 50 users | 45 job titles
+  USCAP 2025: 75 actions | 8 users | 8 job titles
+  USCHA 2025: 50 actions | 6 users | 6 job titles
+  USPA Gala with +1: 1 actions | 1 users | 1 job titles
+  WCLC 2025: 2,945 actions | 116 users | 82 job titles
+  iwCLL 2025: 142 actions | 10 users | 9 job titles
+
+## TOP 50 JOB TITLES BY TOTAL ACTIONS (all events combined)
+  Dir, US Medical Affairs, RMSD: 11,771 actions across 43 events | Top actions: My Appointments(6010), All Appointments(2414), Home(1231), My Schedule(467), Location Availability(444)
+  Dir, US Medical Affairs, Sr. RMSD: 3,541 actions across 30 events | Top actions: My Appointments(2039), All Appointments(653), Home(390), Customer Lists(124), Location Availability(55)
+  Regional Medical Scientific Director: 2,712 actions across 22 events | Top actions: My Appointments(1317), All Appointments(557), Home(255), Location Availability(157), My Schedule(93)
+  Dir, US Medical Affairs, USDMA: 2,146 actions across 36 events | Top actions: My Appointments(893), All Appointments(512), Home(259), My Schedule(160), Customer Lists(74)
+  Medical Advisor: 1,893 actions across 24 events | Top actions: My Appointments(546), Home(360), All Appointments(354), My Schedule(190), Full Schedule(129)
+  Sr. Prin. Scientist, Clinical Research: 1,776 actions across 22 events | Top actions: My Appointments(694), Home(312), All Appointments(217), My Schedule(194), Full Schedule(64)
+  Sr Prin Scientist, V&I GMSA TA ONC, GDMA: 1,732 actions across 17 events | Top actions: My Appointments(919), All Appointments(344), Home(281), My Schedule(43), Full Schedule(30)
+  Prin. Scientist, Clinical Research: 1,397 actions across 14 events | Top actions: My Appointments(514), My Schedule(258), Home(229), All Appointments(124), Full Schedule(111)
+  RMSD: 1,390 actions across 14 events | Top actions: My Appointments(638), All Appointments(318), Home(99), My Schedule(88), Customer Lists(85)
+  Assoc. Dir, Medical Affairs ONC: 1,344 actions across 11 events | Top actions: My Appointments(517), All Appointments(190), My Schedule(184), Home(165), Full Schedule(101)
+  Clinical Director: 1,061 actions across 21 events | Top actions: My Appointments(437), Home(213), My Schedule(118), All Appointments(105), Full Schedule(61)
+  Dir, Global Marketing ONC: 1,031 actions across 14 events | Top actions: My Appointments(409), Home(162), My Schedule(140), All Appointments(122), Full Schedule(74)
+  Sr. Spclst, Medical Affairs ONC: 1,028 actions across 9 events | Top actions: Home(305), My Schedule(213), My Appointments(165), Full Schedule(116), All Appointments(72)
+  Assoc. Dir., Licensing: 1,008 actions across 5 events | Top actions: All Appointments(444), Location Availability(250), My Appointments(169), Events(42), Attendees(26)
+  Assoc Dir, Global Oncology Scientific Communication Strategy: 1,002 actions across 12 events | Top actions: All Appointments(496), Location Availability(161), Home(149), Full Schedule(96), My Appointments(40)
+  Sr Spclst, V&I GMSA AP, Medical Advisor: 978 actions across 4 events | Top actions: My Appointments(464), Home(293), My Schedule(88), All Appointments(42), Full Schedule(42)
+  Executive Director: 909 actions across 14 events | Top actions: My Appointments(320), Home(182), All Appointments(170), My Schedule(77), Full Schedule(51)
+  Sr Dir, US Medical Affairs, TL: 904 actions across 19 events | Top actions: All Appointments(376), Home(165), My Appointments(153), My Schedule(63), Full Schedule(48)
+  Dir, Medical Affairs ONC: 853 actions across 12 events | Top actions: My Appointments(314), All Appointments(233), My Schedule(85), Home(69), Full Schedule(52)
+  Regional Medical Scientific Director, GU Oncology: 760 actions across 5 events | Top actions: My Appointments(404), All Appointments(249), Home(37), Location Availability(25), Customer Lists(11)
+  Sr. Spclst, Medical Affairs: 756 actions across 20 events | Top actions: My Schedule(207), My Appointments(140), Full Schedule(128), All Appointments(72), Home(71)
+  Prin Scientist, V&I GMSA TA ONC, RDMA: 733 actions across 11 events | Top actions: My Appointments(318), Home(167), All Appointments(116), My Schedule(64), Full Schedule(46)
+  Assoc Dir, V&I GMVC Research Mgmt, MISP Ops: 712 actions across 11 events | Top actions: All Appointments(263), My Appointments(243), Home(55), My Schedule(41), Customer Lists(38)
+  Assoc. Dir, Regional Marketing ONC: 696 actions across 11 events | Top actions: My Appointments(296), All Appointments(182), Home(53), Master List(40), Full Schedule(34)
+  Dir, Medical Affairs: 694 actions across 11 events | Top actions: My Appointments(259), All Appointments(154), Home(83), Master List(30), My Schedule(29)
+  Senior Medical Manager: 628 actions across 5 events | Top actions: My Appointments(196), My Schedule(155), Full Schedule(71), Home(49), Location Availability(40)
+  Assoc. Dir, Clin. Operations: 613 actions across 4 events | Top actions: My Schedule(124), Home(116), All Appointments(108), My Appointments(107), Full Schedule(82)
+  Sr. Principal Scientist: 595 actions across 6 events | Top actions: My Appointments(203), Home(186), My Schedule(81), Appointments(32), All Appointments(30)
+  Assoc. Dir, Medical Affairs: 588 actions across 20 events | Top actions: My Appointments(170), My Schedule(92), Full Schedule(73), Home(57), Location Availability(40)
+  RDMA Oncology-Prostate Cancer EMEAC: 551 actions across 4 events | Top actions: My Appointments(203), All Appointments(84), My Schedule(54), Home(53), Location Availability(52)
+  Prin Scientist, V&I GMSA TA Gen & Spec Med, RDMA: 541 actions across 10 events | Top actions: My Appointments(227), All Appointments(94), My Schedule(67), Location Availability(47), Home(30)
+  Sr. Dir, Medical Affairs ONC: 540 actions across 5 events | Top actions: My Appointments(275), All Appointments(85), Home(67), Full Schedule(36), My Schedule(28)
+  Assoc. Dir, Clin. Operations II: 477 actions across 6 events | Top actions: My Appointments(186), All Appointments(102), Home(84), My Schedule(16), Appointments(16)
+  Sr Spclst, V&I GMSA Japan, Medical & Scientific Research Management: 453 actions across 6 events | Top actions: My Appointments(207), All Appointments(160), Home(29), Location Availability(17), Attendees(14)
+  Sr. Scientist, Clin. Operations: 450 actions across 5 events | Top actions: My Appointments(164), All Appointments(95), Home(68), Location Availability(32), My Schedule(28)
+  Senior Director: 443 actions across 7 events | Top actions: My Appointments(171), My Schedule(136), Home(42), All Appointments(38), Full Schedule(27)
+  Associate Director, Global Professional Society Affairs: 431 actions across 9 events | Top actions: My Appointments(222), Home(132), All Appointments(24), Location Availability(18), Attendees(17)
+  Dir, Global Marketing: 401 actions across 8 events | Top actions: My Appointments(119), My Schedule(111), Full Schedule(50), All Appointments(47), Location Availability(25)
+  Assoc Dir, V&I GMSA LATAM, Medical Manager: 400 actions across 12 events | Top actions: My Schedule(86), Home(81), My Appointments(65), Full Schedule(57), All Appointments(45)
+  Exec. Dir., Business Development: 399 actions across 2 events | Top actions: My Appointments(209), All Appointments(75), Schedule(62), Home(21), Events(12)
+  Dist. Scientist, Clinical Research: 390 actions across 15 events | Top actions: My Appointments(145), Home(57), My Schedule(55), Engagements(37), Full Schedule(28)
+  Principal Scientist: 388 actions across 10 events | Top actions: My Schedule(102), My Appointments(88), Full Schedule(46), Home(36), Engagements(20)
+  Director: 383 actions across 9 events | Top actions: My Appointments(146), Home(105), All Appointments(44), My Schedule(28), Full Schedule(17)
+  Senior Director Clinical Research: 374 actions across 4 events | Top actions: Home(171), My Appointments(152), All Appointments(30), Appointments(9), Attendees(5)
+  RDMA Lung Oncology: 372 actions across 5 events | Top actions: My Appointments(145), All Appointments(70), My Schedule(49), Appointments(37), Home(28)
+  Dr.: 366 actions across 6 events | Top actions: My Appointments(133), Home(83), All Appointments(52), My Schedule(31), Location Availability(22)
+  Exec Dir Med Affairs, V&I GMSA TA ONC: 358 actions across 8 events | Top actions: Home(113), My Appointments(113), All Appointments(55), My Schedule(28), Full Schedule(26)
+  Dist Scientist, V&I GMSA TA ONC, EDSA: 356 actions across 8 events | Top actions: My Appointments(201), Home(90), Appointments(17), All Appointments(15), My Schedule(13)
+  Regional Director Medical Affairs: 348 actions across 7 events | Top actions: My Appointments(160), All Appointments(71), My Schedule(32), Home(26), Full Schedule(21)
+  Assoc Dir, V&I GMSA Japan, Medical Advisor: 348 actions across 7 events | Top actions: My Appointments(154), All Appointments(82), Location Availability(53), Home(32), Full Schedule(17)
+
+## TOP TITLES PER EVENT (top 20 events by activity)
+  ASCO 2025:
+    - Dir, US Medical Affairs, RMSD: 4,303 actions
+    - Dir, US Medical Affairs, Sr. RMSD: 1,249 actions
+    - Regional Medical Scientific Director: 760 actions
+    - Prin. Scientist, Clinical Research: 710 actions
+    - Dir, US Medical Affairs, USDMA: 590 actions
+  ESMO 2025:
+    - Medical Advisor: 1,019 actions
+    - Sr. Spclst, Medical Affairs ONC: 765 actions
+    - Dir, US Medical Affairs, RMSD: 479 actions
+    - Prin Scientist, V&I GMSA TA ONC, RDMA: 433 actions
+    - Assoc. Dir, Medical Affairs ONC: 400 actions
+  ASH 2025:
+    - Dir, US Medical Affairs, RMSD: 1,891 actions
+    - Dir, US Medical Affairs, USDMA: 533 actions
+    - Sr. Prin. Scientist, Clinical Research: 425 actions
+    - Sr Prin Scientist, V&I GMSA TA ONC, GDMA: 360 actions
+    - Director, Global Oncology: 274 actions
+  ASCO GU 2025:
+    - Dir, US Medical Affairs, RMSD: 754 actions
+    - Dir, US Medical Affairs, Sr. RMSD: 396 actions
+    - Sr Spclst, V&I GMSA AP, Medical Advisor: 288 actions
+    - Sr. Scientist, Clin. Operations: 204 actions
+    - Assoc. Dir, Clin. Operations II: 198 actions
+  JP Morgan Healthcare Conference 2025:
+    - Assoc. Dir., Licensing: 923 actions
+    - Exec. Dir., Business Development: 391 actions
+    - Dir, Business Development: 315 actions
+    - Dir., Licensing - Enabling Technologies: 311 actions
+    - Dir, Business Development - Pacific Innovation Hub: 243 actions
+  WCLC 2025:
+    - Dir, US Medical Affairs, RMSD: 692 actions
+    - Sr Dir, US Medical Affairs, TL: 148 actions
+    - Dir, Global Marketing ONC: 140 actions
+    - Medical Advisor: 126 actions
+    - Sr. Principal Scientist: 115 actions
+  SABCS 2025:
+    - Dir, US Medical Affairs, Sr. RMSD: 299 actions
+    - Regional Medical Scientific Director: 245 actions
+    - RMSD: 176 actions
+    - Dir, US Medical Affairs, RMSD: 112 actions
+    - Sr. Dir, Medical Affairs ONC: 104 actions
+  SGO 2025:
+    - Dir, US Medical Affairs, Sr. RMSD: 311 actions
+    - Regional Medical Scientific Director: 232 actions
+    - RMSD: 223 actions
+    - Sr. Clinical Research Manager: 132 actions
+    - Sr. Dir, Medical Affairs ONC: 74 actions
+  ASCO GI 2025:
+    - Dir, US Medical Affairs, RMSD: 750 actions
+    - Spclst, V&I GMSA AP, Medical Science Liaison: 143 actions
+    - Dir, US Medical Affairs, Sr. RMSD: 135 actions
+    - Sr Spclst, V&I GMVC NIRM - Global Research Management : 80 actions
+    - Dir, US Medical Affairs, USDMA: 74 actions
+  AHA 2025:
+    - Regional Medical Scientific Director: 150 actions
+    - Marketing Product Owner: 141 actions
+    - Dir, US Medical Affairs, RMSD: 119 actions
+    - Prin Scientist, V&I GMSA TA Gen & Spec Med, RDMA: 118 actions
+    - Assoc Prin Scientist, V&I GMSA TA Gen & Spec Med, Medical Excellence: 95 actions
+  AACR 2025:
+    - Dir, US Medical Affairs, RMSD: 358 actions
+    - Assoc Dir, Global Oncology Scientific Communication Strategy: 119 actions
+    - Dir, US Medical Affairs, Sr. RMSD: 94 actions
+    - Global Director - H&N Marketing: 82 actions
+    - Dir, US Medical Affairs, USDMA: 76 actions
+  ACC 2025:
+    - Regional Medical Scientific Director: 290 actions
+    - Dir, US Medical Affairs, Sr. RMSD: 152 actions
+    - RDMA Cardiovascular MER: 99 actions
+    - Marketing Product Owner: 87 actions
+    - Associate Director: 80 actions
+  ERS 2025:
+    - Sr. Spclst, Medical Affairs: 180 actions
+    - Prin Scientist, V&I GMSA TA Gen & Spec Med, RDMA: 83 actions
+    - Prin. Scientist, Health Economics: 80 actions
+    - Assoc Dir, V&I GMVC Research Mgmt, MISP Ops: 66 actions
+    - Assoc. Dir, Medical Affairs: 66 actions
+  EHA 2025:
+    - Dir, US Medical Affairs, RMSD: 228 actions
+    - Assoc. Dir, Medical Affairs ONC: 205 actions
+    - Sr. Prin. Scientist, Clinical Research: 117 actions
+    - Clinical Research Manager: 73 actions
+    - Sr Dir, V&I GMSA TA ONC, GDMA: 62 actions
+  ECCO 2025:
+    - Clinical Director: 100 actions
+    - Director, Global Marketing, Immunology: 91 actions
+    - Director Medical Affairs ID & Immunology: 78 actions
+    - Executive Director: 69 actions
+    - Global Brand Lead: 65 actions
+  ESC 2025:
+    - Prin Scientist, V&I GMSA TA Gen & Spec Med, RDMA: 117 actions
+    - Sr. Assoc, Administrative Services: 101 actions
+    - Sr. Spclst, Medical Affairs: 82 actions
+    - RDMA Cardiovascular MER: 78 actions
+    - Dir, US Medical Affairs, USDMA: 72 actions
+  ATS 2025:
+    - Sr Prin Scientist, V&I GMSA TA Gen & Spec Med, Medical Excellence: 109 actions
+    - Regional Medical Scientific Director: 79 actions
+    - Sr. Scientist, Clin. Operations: 76 actions
+    - AD Study Management: 66 actions
+    - Lead Assoc, Administrative Services: 59 actions
+  DDW 2025:
+    - Dir, US Medical Affairs, RMSD: 204 actions
+    - Dir, US Medical Affairs, USDMA: 88 actions
+    - Clinical Director: 65 actions
+    - Sr Dir, US Medical Affairs, TL: 56 actions
+    - Executive Director: 54 actions
+  ID WEEK 2025:
+    - Assoc Director, Global Marketing Strategy: 190 actions
+    - Assoc. Dir, Marketing: 125 actions
+    - Dir, US Medical Affairs, RMSD: 90 actions
+    - Assoc. Dir, Medical Affairs: 46 actions
+    - Assoc. Dir , D&A Strategy: 39 actions
+  AUA 2025:
+    - Dir, US Medical Affairs, RMSD: 465 actions
+    - Regional Medical Scientific Director: 100 actions
+    - Sr. Acct. Mgr, Account Management ONC: 55 actions
+    - Assoc. Dir, Regional Marketing ONC: 53 actions
+    - Dir, V&I GMSA Japan, Medical Advisor: 50 actions
+
+## ACTION TYPE TOTALS (all events, all titles)
+  My Appointments: 39,540
+  All Appointments: 18,344
+  Home: 17,401
+  My Schedule: 11,610
+  Full Schedule: 6,433
+  Location Availability: 4,317
+  Customer Lists: 1,655
+  Attendees: 1,525
+  Engagements: 1,471
+  Appointments: 1,399
+  Schedule: 1,176
+  Events: 1,012
+  Maps: 955
+  Master List: 916
+  Attending / Not Attending: 765
+  Live Feed: 716
+  Groups: 349
+  Explore: 209
+  Support and Settings: 182
+  Profile: 126
+  People: 69
+  Travel: 36
+  Customers: 21
+  Speakers: 11
+
+## KEY TITLE PROFILES (titles with 1000+ actions)
+  Dir, US Medical Affairs, RMSD (11,771 total actions, 43 events):
+    Most active at: ASCO 2025(4303), ASH 2025(1891), ASCO GU 2025(754), ASCO GI 2025(750), WCLC 2025(692)
+    Top actions: My Appointments(6010), All Appointments(2414), Home(1231), My Schedule(467), Location Availability(444)
+  Dir, US Medical Affairs, Sr. RMSD (3,541 total actions, 30 events):
+    Most active at: ASCO 2025(1249), ASCO GU 2025(396), SGO 2025(311), SABCS 2025(299), ASH 2025(241)
+    Top actions: My Appointments(2039), All Appointments(653), Home(390), Customer Lists(124), Location Availability(55)
+  Regional Medical Scientific Director (2,712 total actions, 22 events):
+    Most active at: ASCO 2025(760), ESMO 2025(318), ACC 2025(290), SABCS 2025(245), SGO 2025(232)
+    Top actions: My Appointments(1317), All Appointments(557), Home(255), Location Availability(157), My Schedule(93)
+  Dir, US Medical Affairs, USDMA (2,146 total actions, 36 events):
+    Most active at: ASCO 2025(590), ASH 2025(533), Crohn's & Colitis 2025(136), AHA 2025(91), DDW 2025(88)
+    Top actions: My Appointments(893), All Appointments(512), Home(259), My Schedule(160), Customer Lists(74)
+  Medical Advisor (1,893 total actions, 24 events):
+    Most active at: ESMO 2025(1019), ASCO 2025(272), WCLC 2025(126), EAU 2025(80), ERS 2025(62)
+    Top actions: My Appointments(546), Home(360), All Appointments(354), My Schedule(190), Full Schedule(129)
+  Sr. Prin. Scientist, Clinical Research (1,776 total actions, 22 events):
+    Most active at: ASCO 2025(553), ASH 2025(425), EHA 2025(117), ASCO GU 2025(110), SABCS 2025(78)
+    Top actions: My Appointments(694), Home(312), All Appointments(217), My Schedule(194), Full Schedule(64)
+  Sr Prin Scientist, V&I GMSA TA ONC, GDMA (1,732 total actions, 17 events):
+    Most active at: ASCO 2025(562), ESMO 2025(388), ASH 2025(360), WCLC 2025(76), SABCS 2025(60)
+    Top actions: My Appointments(919), All Appointments(344), Home(281), My Schedule(43), Full Schedule(30)
+  Prin. Scientist, Clinical Research (1,397 total actions, 14 events):
+    Most active at: ASCO 2025(710), ASCO GU 2025(155), ESMO 2025(113), ASH 2025(102), SGO 2025(70)
+    Top actions: My Appointments(514), My Schedule(258), Home(229), All Appointments(124), Full Schedule(111)
+  RMSD (1,390 total actions, 14 events):
+    Most active at: ASCO 2025(528), ESMO 2025(237), SGO 2025(223), SABCS 2025(176), ASCO GU 2025(74)
+    Top actions: My Appointments(638), All Appointments(318), Home(99), My Schedule(88), Customer Lists(85)
+  Assoc. Dir, Medical Affairs ONC (1,344 total actions, 11 events):
+    Most active at: ESMO 2025(400), ASCO 2025(274), ASH 2025(239), EHA 2025(205), ELCC 2025(122)
+    Top actions: My Appointments(517), All Appointments(190), My Schedule(184), Home(165), Full Schedule(101)
+  Clinical Director (1,061 total actions, 21 events):
+    Most active at: ASCO 2025(346), ESMO 2025(128), ECCO 2025(100), SABCS 2025(68), DDW 2025(65)
+    Top actions: My Appointments(437), Home(213), My Schedule(118), All Appointments(105), Full Schedule(61)
+  Dir, Global Marketing ONC (1,031 total actions, 14 events):
+    Most active at: ASCO 2025(402), ESMO 2025(145), WCLC 2025(140), SGO 2025(69), ASH 2025(48)
+    Top actions: My Appointments(409), Home(162), My Schedule(140), All Appointments(122), Full Schedule(74)
+  Sr. Spclst, Medical Affairs ONC (1,028 total actions, 9 events):
+    Most active at: ESMO 2025(765), ESMO GI 2025(61), WCLC 2025(61), ELCC 2025(49), ASCO GU 2025(38)
+    Top actions: Home(305), My Schedule(213), My Appointments(165), Full Schedule(116), All Appointments(72)
+  Assoc. Dir., Licensing (1,008 total actions, 5 events):
+    Most active at: JP Morgan Healthcare Conference 2025(923), ASCO 2025(35), ESMO 2025(25), AACR 2025(23), EADV 2025(2)
+    Top actions: All Appointments(444), Location Availability(250), My Appointments(169), Events(42), Attendees(26)
+  Assoc Dir, Global Oncology Scientific Communication Strategy (1,002 total actions, 12 events):
+    Most active at: ASCO 2025(325), ESMO 2025(217), AACR 2025(119), ASCO GU 2025(82), ASH 2025(65)
+    Top actions: All Appointments(496), Location Availability(161), Home(149), Full Schedule(96), My Appointments(40)

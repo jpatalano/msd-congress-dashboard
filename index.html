@@ -1,0 +1,2880 @@
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MSD Congress Activity Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ─────────────────────────────────────────────
+       Event Cadence Design System
+       Pure white surfaces · dark teal accent · flat
+    ───────────────────────────────────────────── */
+    :root {
+      /* Surfaces */
+      --bg:            #f5f6f8;
+      --surface:       #ffffff;
+      --surface-sub:   #f9fafb;
+
+      /* Borders & dividers */
+      --border:        #e2e5ea;
+      --divider:       #edf0f3;
+
+      /* Text */
+      --text-primary:  #1a1f2e;
+      --text-secondary:#52596b;
+      --text-muted:    #8c95a6;
+      --text-faint:    #b8c0cc;
+
+      /* Accent — dark teal (matches location bars) */
+      --accent:        #2d6a6f;
+      --accent-mid:    #3d8b91;
+      --accent-light:  #e8f4f5;
+      --accent-hover:  #245659;
+
+      /* Link / interactive blue */
+      --link:          #3b78c4;
+      --link-hover:    #2d5f9e;
+
+      /* KPI accent bars (matches platform pastel cards) */
+      --kpi-purple:    #9b7fc7;
+      --kpi-orange:    #e8923a;
+      --kpi-teal:      #4ab0b8;
+      --kpi-red:       #e05a6a;
+      --kpi-gray:      #8fa0b0;
+      --kpi-green:     #5aac7a;
+
+      /* Row states */
+      --row-hover:     #f4f6f9;
+      --row-selected:  #eef5f6;
+      --row-selected-l:#2d6a6f;
+
+      /* Typography */
+      --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+      /* Sizes */
+      --sidebar-w:     220px;
+      --header-h:      52px;
+      --toolbar-h:     44px;
+
+      /* Misc */
+      --radius:        6px;
+      --transition:    140ms ease;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow: hidden; }
+    html {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    body {
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.5;
+    }
+    button { cursor: pointer; background: none; border: none; font: inherit; color: inherit; }
+    table { border-collapse: collapse; width: 100%; }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+    /* ────────────────────────────────────────────
+       APP SHELL
+    ─────────────────────────────────────────── */
+    .app {
+      display: grid;
+      grid-template-columns: var(--sidebar-w) 1fr;
+      height: 100dvh;
+    }
+
+    /* ────────────────────────────────────────────
+       SIDEBAR
+    ─────────────────────────────────────────── */
+    .sidebar {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Logo / brand */
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 16px;
+      height: var(--header-h);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .brand-icon svg { width: 16px; height: 16px; color: #fff; }
+    .brand-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--text-muted);
+      margin-top: 1px;
+    }
+
+    /* Nav */
+    .sidebar-nav {
+      flex: 1;
+      padding: 12px 8px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    .nav-group-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      padding: 6px 8px 4px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border-radius: var(--radius);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      user-select: none;
+      margin-bottom: 1px;
+    }
+    .nav-item:hover { background: var(--row-hover); color: var(--text-primary); }
+    .nav-item.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      font-weight: 500;
+    }
+    .nav-item svg { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.7; }
+    .nav-item.active svg { opacity: 1; }
+
+    /* Context trail in sidebar */
+    .sidebar-context {
+      padding: 8px;
+      border-top: 1px solid var(--divider);
+      margin-top: 4px;
+    }
+    .context-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-faint);
+      padding: 4px 8px;
+    }
+    .context-crumb {
+      display: flex;
+      align-items: flex-start;
+      gap: 7px;
+      padding: 5px 8px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .context-crumb:hover { background: var(--row-hover); }
+    .context-crumb svg { width: 12px; height: 12px; flex-shrink: 0; margin-top: 2px; color: var(--text-faint); }
+    .context-crumb-text {
+      font-size: 11.5px;
+      color: var(--text-secondary);
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 155px;
+    }
+    .context-crumb-text.is-active { color: var(--accent); font-weight: 500; }
+
+    /* Sidebar footer */
+    .sidebar-footer {
+      padding: 10px 16px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+    .sidebar-footer a {
+      font-size: 11px;
+      color: var(--text-faint);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .sidebar-footer a:hover { color: var(--accent); }
+    .theme-btn {
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      color: var(--text-muted);
+      transition: background var(--transition), color var(--transition);
+    }
+    .theme-btn:hover { background: var(--row-hover); color: var(--text-primary); }
+    .theme-btn svg { width: 14px; height: 14px; }
+
+    /* ────────────────────────────────────────────
+       MAIN AREA
+    ─────────────────────────────────────────── */
+    .main {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Page header — matches EC "All Appointments" style */
+    .page-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+    .page-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 8px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      transition: background var(--transition), color var(--transition);
+    }
+    .back-btn:hover { background: var(--row-hover); color: var(--text-secondary); }
+    .back-btn svg { width: 13px; height: 13px; }
+    .page-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .page-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .vdivider { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
+
+    /* Header stats — compact right side */
+    .header-stats {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-shrink: 0;
+    }
+    .hstat { text-align: right; }
+    .hstat-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums lining-nums;
+      line-height: 1.1;
+    }
+    .hstat-lbl {
+      font-size: 10px;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    /* ────────────────────────────────────────────
+       KPI CARDS — matches EC pastel stat cards
+    ─────────────────────────────────────────── */
+    .kpi-strip {
+      display: flex;
+      align-items: stretch;
+      gap: 0;
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      flex-shrink: 0;
+    }
+    .kpi-card {
+      flex: 1;
+      padding: 12px 20px;
+      border-right: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-card:last-child { border-right: none; }
+    .kpi-card::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 3px;
+      height: 100%;
+    }
+    .kpi-card.c-purple::after  { background: var(--kpi-purple); }
+    .kpi-card.c-orange::after  { background: var(--kpi-orange); }
+    .kpi-card.c-teal::after    { background: var(--kpi-teal); }
+    .kpi-val {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums lining-nums;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+    }
+    .kpi-lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ────────────────────────────────────────────
+       TOOLBAR — search + count (matches EC toolbar)
+    ─────────────────────────────────────────── */
+    .toolbar {
+      height: var(--toolbar-h);
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .search-wrap {
+      position: relative;
+      width: 240px;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 13px;
+      height: 13px;
+      color: var(--text-faint);
+      pointer-events: none;
+    }
+    .search-input {
+      width: 100%;
+      height: 30px;
+      padding: 0 10px 0 28px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--surface-sub);
+      font-size: 12px;
+      font-family: var(--font);
+      color: var(--text-primary);
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-mid);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(45,106,111,0.1);
+    }
+    .search-input::placeholder { color: var(--text-faint); }
+    .row-count {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-left: auto;
+    }
+    .drill-hint {
+      font-size: 11px;
+      color: var(--text-faint);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .drill-hint svg { width: 11px; height: 11px; }
+
+    /* ────────────────────────────────────────────
+       TABLE — matches EC grid exactly
+    ─────────────────────────────────────────── */
+    .table-wrap {
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    /* The table lives directly in the scroll area, no card wrapper */
+    .grid-table {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .grid-table thead tr {
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .grid-table thead th {
+      padding: 0 16px;
+      height: 34px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      white-space: nowrap;
+      user-select: none;
+      border-right: 1px solid var(--divider);
+    }
+    .grid-table thead th:last-child { border-right: none; }
+    .grid-table thead th.sortable { cursor: pointer; }
+    .grid-table thead th.sortable:hover { color: var(--text-secondary); }
+    .grid-table thead th.sort-asc::after  { content: ' ↑'; color: var(--accent); }
+    .grid-table thead th.sort-desc::after { content: ' ↓'; color: var(--accent); }
+    .grid-table thead th:nth-child(n+3) { text-align: right; }
+
+    .grid-table tbody tr {
+      border-bottom: 1px solid var(--divider);
+      transition: background var(--transition);
+      cursor: pointer;
+    }
+    .grid-table tbody tr:last-child { border-bottom: none; }
+    .grid-table tbody tr:hover { background: var(--row-hover); }
+    .grid-table tbody tr.selected {
+      background: var(--row-selected);
+      border-left: 2px solid var(--row-selected-l);
+    }
+    .grid-table tbody tr.no-click { cursor: default; }
+    .grid-table tbody tr.no-click:hover { background: transparent; }
+
+    .grid-table td {
+      padding: 0 16px;
+      height: 40px;
+      vertical-align: middle;
+      font-size: 13px;
+      border-right: 1px solid var(--divider);
+    }
+    .grid-table td:last-child { border-right: none; }
+    .grid-table td:nth-child(n+3) { text-align: right; }
+
+    /* Row number column */
+    .col-num {
+      width: 44px;
+      font-size: 11px;
+      color: var(--text-faint);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Main name cell */
+    .cell-name {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cell-avatar {
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      letter-spacing: 0;
+    }
+    .cell-name-text { line-height: 1.3; min-width: 0; }
+    .cell-name-primary {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    /* Clickable rows get link-style primary text */
+    tr:not(.no-click) .cell-name-primary {
+      color: var(--link);
+    }
+    tr:not(.no-click):hover .cell-name-primary {
+      color: var(--link-hover);
+      text-decoration: underline;
+    }
+    .cell-name-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Numeric + bar cells */
+    .cell-num {
+      font-variant-numeric: tabular-nums lining-nums;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+    .bar-cell {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .bar-num {
+      font-variant-numeric: tabular-nums lining-nums;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-primary);
+      min-width: 52px;
+      text-align: right;
+    }
+    .bar-track {
+      width: 72px;
+      height: 5px;
+      border-radius: 3px;
+      background: var(--divider);
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--accent);
+    }
+
+    /* ────────────────────────────────────────────
+       CHARTS PAGE
+    ─────────────────────────────────────────── */
+    .chart-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      flex: 1;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    /* Left panel — alphabetical title list */
+    .chart-title-panel {
+      background: var(--surface);
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chart-panel-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .chart-panel-header .search-wrap { width: 100%; }
+    .chart-title-list {
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+    .chart-title-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 14px;
+      border-bottom: 1px solid var(--divider);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .chart-title-item:last-child { border-bottom: none; }
+    .chart-title-item:hover { background: var(--row-hover); }
+    .chart-title-item.selected {
+      background: var(--row-selected);
+      border-left: 2px solid var(--accent);
+      padding-left: 12px;
+    }
+    .chart-title-item-text {
+      min-width: 0;
+      flex: 1;
+    }
+    .chart-title-item-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .chart-title-item.selected .chart-title-item-name { color: var(--accent); }
+    .chart-title-item-total {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+      flex-shrink: 0;
+    }
+    .chart-title-count {
+      font-size: 11px;
+      color: var(--text-muted);
+      padding: 6px 14px;
+      border-bottom: 1px solid var(--divider);
+      flex-shrink: 0;
+    }
+
+    /* Right panel — chart area */
+    .chart-right {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .chart-toolbar {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      height: var(--toolbar-h);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+    .chart-mode-btn {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 10px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      transition: background var(--transition), color var(--transition), border-color var(--transition);
+    }
+    .chart-mode-btn:hover { background: var(--row-hover); color: var(--text-secondary); }
+    .chart-mode-btn.active {
+      background: var(--accent-light);
+      color: var(--accent);
+      border-color: var(--accent-mid);
+    }
+    .chart-mode-btn svg { width: 13px; height: 13px; }
+    .chart-title-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-left: auto;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 480px;
+    }
+    .chart-scroll {
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding: 20px 24px 24px;
+    }
+
+    /* Stacked bar chart rows */
+    .chart-section-title {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+    .chart-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+    .chart-row-label {
+      width: 180px;
+      flex-shrink: 0;
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-align: right;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .chart-row-bar {
+      flex: 1;
+      height: 20px;
+      display: flex;
+      border-radius: 3px;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .chart-row-bar-seg {
+      height: 100%;
+      transition: opacity var(--transition);
+      position: relative;
+    }
+    .chart-row-bar-seg:hover { opacity: 0.8; }
+    .chart-row-total {
+      width: 52px;
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Legend */
+    .chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid var(--divider);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: opacity var(--transition);
+    }
+    .legend-item.dimmed { opacity: 0.35; }
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* Tooltip */
+    .chart-tooltip {
+      position: fixed;
+      background: var(--text-primary);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: var(--radius);
+      font-size: 12px;
+      pointer-events: none;
+      z-index: 1000;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      transition: opacity 0.1s ease;
+    }
+    .chart-tooltip.hidden { opacity: 0; }
+
+    /* ────────────────────────────────────────────
+       PAGE SYSTEM
+    ─────────────────────────────────────────── */
+    .page { display: none; flex-direction: column; height: 100%; overflow: hidden; }
+    .page.active { display: flex; }
+
+    /* ────────────────────────────────────────────
+       EMPTY STATE
+    ─────────────────────────────────────────── */
+    .empty {
+      padding: 40px 16px;
+      text-align: center;
+      color: var(--text-muted);
+    }
+    .empty svg { width: 32px; height: 32px; margin: 0 auto 10px; color: var(--text-faint); }
+    .empty p { font-size: 13px; }
+
+    /* ────────────────────────────────────────────
+       LOADING
+    ─────────────────────────────────────────── */
+    #loading {
+      position: fixed; inset: 0;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      z-index: 999;
+      transition: opacity 0.25s ease;
+    }
+    #loading.hidden { opacity: 0; pointer-events: none; }
+    .spin {
+      width: 32px; height: 32px;
+      border: 2.5px solid var(--border);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.65s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #loading p { font-size: 12px; color: var(--text-muted); }
+
+    /* ────────────────────────────────────────────
+       DARK MODE
+    ─────────────────────────────────────────── */
+    [data-theme="dark"] {
+      --bg:            #111318;
+      --surface:       #1a1e27;
+      --surface-sub:   #1e2330;
+      --border:        #2a3040;
+      --divider:       #232836;
+      --text-primary:  #e4e8f0;
+      --text-secondary:#8d97aa;
+      --text-muted:    #606878;
+      --text-faint:    #404858;
+      --accent:        #4a9fa6;
+      --accent-mid:    #5ab5bc;
+      --accent-light:  #162530;
+      --accent-hover:  #3d8a90;
+      --link:          #6ba3d8;
+      --link-hover:    #90bce8;
+      --row-hover:     #1e2432;
+      --row-selected:  #1a2e32;
+      --row-selected-l:#4a9fa6;
+      --kpi-purple:    #8a6eb8;
+      --kpi-orange:    #d07a2e;
+      --kpi-teal:      #3a9098;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme]) {
+        --bg: #111318; --surface: #1a1e27; --surface-sub: #1e2330;
+        --border: #2a3040; --divider: #232836;
+        --text-primary: #e4e8f0; --text-secondary: #8d97aa;
+        --text-muted: #606878; --text-faint: #404858;
+        --accent: #4a9fa6; --accent-mid: #5ab5bc; --accent-light: #162530;
+        --accent-hover: #3d8a90; --link: #6ba3d8; --link-hover: #90bce8;
+        --row-hover: #1e2432; --row-selected: #1a2e32; --row-selected-l: #4a9fa6;
+        --kpi-purple: #8a6eb8; --kpi-orange: #d07a2e; --kpi-teal: #3a9098;
+      }
+    }
+
+    /* ────────────────────────────────────────────
+       TOGGLE CHECKBOX
+    ─────────────────────────────────────────── */
+    .toggle-check {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .toggle-check input[type="checkbox"] { display: none; }
+    .toggle-check-box {
+      width: 15px;
+      height: 15px;
+      border-radius: 3px;
+      border: 1.5px solid var(--border);
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .toggle-check input:checked + .toggle-check-box {
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+    .toggle-check input:checked + .toggle-check-box::after {
+      content: '';
+      display: block;
+      width: 4px;
+      height: 7px;
+      border: 1.5px solid #fff;
+      border-top: none;
+      border-left: none;
+      transform: rotate(45deg) translate(-1px, -1px);
+    }
+    .toggle-check:hover .toggle-check-box {
+      border-color: var(--accent-mid);
+    }
+
+    /* Wide table scrolls horizontally when action details are shown */
+    #titles-table-wrap { overflow-x: auto; }
+    #titles-table th, #titles-table td { white-space: nowrap; }
+
+    /* ────────────────────────────────────────────
+       COLUMN RESIZE
+    ─────────────────────────────────────────── */
+    .grid-table th { position: relative; }
+    .col-resizer {
+      position: absolute;
+      top: 0; right: 0;
+      width: 6px;
+      height: 100%;
+      cursor: col-resize;
+      z-index: 3;
+      user-select: none;
+    }
+    .col-resizer::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: 2px;
+      width: 2px;
+      height: 60%;
+      border-radius: 1px;
+      background: var(--border);
+      transition: background 0.1s;
+    }
+    .col-resizer:hover::after,
+    .col-resizer.dragging::after {
+      background: var(--accent-mid);
+    }
+    /* Suppress text selection on all tables during a resize drag */
+    body.col-resizing { user-select: none; cursor: col-resize; }
+
+    /* ────────────────────────────────────────────
+       AI CHAT PANEL
+    ─────────────────────────────────────────── */
+    #chat-fab {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(45,106,111,0.35);
+      z-index: 200;
+      transition: background var(--transition), transform 0.15s ease, box-shadow var(--transition);
+      border: none;
+    }
+    #chat-fab:hover {
+      background: var(--accent-hover);
+      transform: scale(1.07);
+      box-shadow: 0 6px 20px rgba(45,106,111,0.45);
+    }
+    #chat-fab svg { width: 22px; height: 22px; }
+
+    #chat-panel {
+      position: fixed;
+      bottom: 84px;
+      right: 24px;
+      width: 400px;
+      max-height: 560px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      display: flex;
+      flex-direction: column;
+      z-index: 199;
+      transform: translateY(16px) scale(0.97);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+    }
+    #chat-panel.open {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+      pointer-events: all;
+    }
+    .chat-header {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .chat-header-icon {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      background: var(--accent);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .chat-header-icon svg { width: 15px; height: 15px; color: #fff; }
+    .chat-header-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      flex: 1;
+    }
+    .chat-header-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+    .chat-close {
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 4px;
+      color: var(--text-muted);
+      transition: background var(--transition), color var(--transition);
+    }
+    .chat-close:hover { background: var(--row-hover); color: var(--text-primary); }
+    .chat-close svg { width: 14px; height: 14px; }
+
+    .chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      scroll-behavior: smooth;
+    }
+    .chat-msg {
+      max-width: 88%;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 10px 10px 3px 10px;
+    }
+    .chat-msg.assistant {
+      align-self: flex-start;
+      background: var(--surface-sub);
+      color: var(--text-primary);
+      padding: 10px 13px;
+      border-radius: 3px 10px 10px 10px;
+      border: 1px solid var(--border);
+      white-space: pre-wrap;
+    }
+    .chat-msg.typing {
+      align-self: flex-start;
+      background: var(--surface-sub);
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      border-radius: 3px 10px 10px 10px;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    .chat-msg.error {
+      align-self: flex-start;
+      background: #fff0f0;
+      color: #c0392b;
+      border: 1px solid #fcd0d0;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+    }
+    [data-theme="dark"] .chat-msg.error { background: #2a1a1a; border-color: #4a2020; color: #e07070; }
+
+    .chat-suggestions {
+      padding: 0 16px 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .chat-suggestion {
+      font-size: 11.5px;
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--surface-sub);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+      white-space: nowrap;
+    }
+    .chat-suggestion:hover {
+      background: var(--accent-light);
+      border-color: var(--accent-mid);
+      color: var(--accent);
+    }
+
+    .chat-input-row {
+      padding: 10px 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    #chat-input {
+      flex: 1;
+      min-height: 36px;
+      max-height: 100px;
+      resize: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 8px 10px;
+      font-size: 12.5px;
+      font-family: var(--font);
+      color: var(--text-primary);
+      background: var(--surface-sub);
+      line-height: 1.4;
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    #chat-input:focus {
+      border-color: var(--accent-mid);
+      background: var(--surface);
+      box-shadow: 0 0 0 3px rgba(45,106,111,0.1);
+    }
+    #chat-input::placeholder { color: var(--text-faint); }
+    #chat-send {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      background: var(--accent);
+      color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      border: none;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background var(--transition);
+    }
+    #chat-send:hover { background: var(--accent-hover); }
+    #chat-send:disabled { background: var(--border); cursor: not-allowed; }
+    #chat-send svg { width: 15px; height: 15px; }
+  </style>
+</head>
+<body>
+
+<!-- Loading -->
+<div id="auth-error" style="display:none;position:fixed;inset:0;background:var(--bg-page,#f5f6f8);display:none;align-items:center;justify-content:center;flex-direction:column;gap:16px;font-family:Inter,sans-serif">
+  <svg viewBox="0 0 24 24" fill="none" stroke="#e05a6a" stroke-width="1.5" style="width:48px;height:48px"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+  <div style="font-size:18px;font-weight:600;color:#1a1d23" id="auth-error-title">Access Denied</div>
+  <div style="font-size:14px;color:#6b7280;max-width:360px;text-align:center" id="auth-error-msg">Your session token is missing or has expired. Please re-open the dashboard from Event Cadence.</div>
+</div>
+
+<div id="loading">
+  <div class="spin"></div>
+  <p>Loading dashboard…</p>
+</div>
+
+<!-- Tooltip -->
+<div class="chart-tooltip hidden" id="chart-tooltip"></div>
+
+<div class="app" id="app" style="display:none">
+
+  <!-- ───── SIDEBAR ───── -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12V5l3.5 4.5L9 5v7"/>
+          <path d="M12 4v8M10.5 5.5L12 4l1.5 1.5"/>
+        </svg>
+      </div>
+      <div>
+        <div class="brand-name">MSD Congress Activity</div>
+        <div class="brand-sub">Dashboard</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-group-label">Views</div>
+      <div class="nav-item active" id="nav-events" onclick="goHome()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        All Events
+      </div>
+      <div class="nav-item" id="nav-all-titles" onclick="goAllTitles()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        All Job Titles
+      </div>
+      <div class="nav-item" id="nav-charts" onclick="goCharts()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/><path d="M9 15h5M9 12h8"/></svg>
+        Charts
+      </div>
+      <div class="nav-item" id="nav-titles" onclick="goToTitles()" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Job Titles
+      </div>
+      <div class="nav-item" id="nav-users" onclick="goToUsers()" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Users
+      </div>
+      <div class="nav-item" id="nav-actions" onclick="goToActions()" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        Actions
+      </div>
+    </nav>
+
+    <div class="sidebar-context" id="context-crumbs" style="display:none">
+      <div class="context-label">Context</div>
+      <div class="context-crumb" id="crumb-event" onclick="goHome()" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+        <span class="context-crumb-text is-active" id="crumb-event-name"></span>
+      </div>
+      <div class="context-crumb" id="crumb-title" onclick="goToTitles()" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        <span class="context-crumb-text" id="crumb-title-name"></span>
+      </div>
+      <div class="context-crumb" id="crumb-user" onclick="goToUsers()" style="display:none">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="context-crumb-text" id="crumb-user-name"></span>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">
+      <a href="https://www.perplexity.ai/computer" target="_blank" rel="noopener noreferrer">Perplexity Computer</a>
+      <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">
+        <svg id="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ───── MAIN ───── -->
+  <main class="main">
+
+    <!-- ══ PAGE: CHARTS ══ -->
+    <div class="page" id="page-charts">
+
+      <div class="page-header">
+        <div class="page-header-left">
+          <div class="page-title">Action Types by Job Title</div>
+          <div class="page-subtitle" style="margin-left:4px">All Events · Top 50 Titles</div>
+        </div>
+        <div class="header-stats">
+          <div class="hstat">
+            <div class="hstat-val" id="chart-kpi-titles">—</div>
+            <div class="hstat-lbl">Titles Shown</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="chart-kpi-actions">—</div>
+            <div class="hstat-lbl">Action Types</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-layout">
+        <div class="chart-title-panel">
+          <div class="chart-panel-header">
+            <div class="search-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input class="search-input" id="search-chart-titles" type="text" placeholder="Filter titles…" oninput="filterChartTitles()" />
+            </div>
+          </div>
+          <div class="chart-title-count" id="chart-title-count"></div>
+          <div class="chart-title-list" id="chart-title-list"></div>
+        </div>
+        <div class="chart-right">
+          <div class="chart-toolbar">
+            <button class="chart-mode-btn active" id="btn-stacked" onclick="setChartMode('stacked')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="4" rx="1"/><rect x="3" y="10" width="18" height="4" rx="1"/><rect x="3" y="16" width="18" height="4" rx="1"/></svg>
+              Stacked Bars
+            </button>
+            <button class="chart-mode-btn" id="btn-pct" onclick="setChartMode('pct')">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 5 5 19M9 6.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0zM20 17.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/></svg>
+              % of Total
+            </button>
+            <span class="chart-title-label" id="chart-viewing-label">All visible titles</span>
+          </div>
+          <div class="chart-scroll">
+            <div id="chart-bars"></div>
+            <div class="chart-legend" id="chart-legend"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE 1: EVENTS ══ -->
+    <div class="page active" id="page-events">
+      <div class="page-header">
+        <div class="page-header-left">
+          <div class="page-title">All Events</div>
+        </div>
+        <div class="header-stats">
+          <div class="hstat">
+            <div class="hstat-val" id="kpi-events">—</div>
+            <div class="hstat-lbl">Events</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="kpi-total-users">—</div>
+            <div class="hstat-lbl">Total User Views</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="kpi-total-actions">—</div>
+            <div class="hstat-lbl">Total Actions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="kpi-strip">
+        <div class="kpi-card c-purple">
+          <div class="kpi-val" id="kpi2-events">—</div>
+          <div class="kpi-lbl">Events</div>
+        </div>
+        <div class="kpi-card c-orange">
+          <div class="kpi-val" id="kpi2-users">—</div>
+          <div class="kpi-lbl">Total User Views</div>
+        </div>
+        <div class="kpi-card c-teal">
+          <div class="kpi-val" id="kpi2-actions">—</div>
+          <div class="kpi-lbl">Total Actions</div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" id="search-events" type="text" placeholder="Search events…" oninput="filterEvents()" />
+        </div>
+        <span class="row-count" id="events-count"></span>
+        <label class="toggle-check" id="event-action-details-toggle">
+          <input type="checkbox" id="show-event-action-details" onchange="renderEventsTable()" />
+          <span class="toggle-check-box"></span>
+          Show Action Details
+        </label>
+        <span class="drill-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M14 10l6.1-6.1M9 21H3v-6M10 14l-6.1 6.1"/></svg>
+          Click a row to drill down
+        </span>
+      </div>
+
+      <div class="table-wrap" id="events-table-wrap" style="overflow-x:auto">
+        <table class="grid-table" id="events-table">
+          <thead id="events-thead">
+            <tr>
+              <th class="col-num">#</th>
+              <th class="sortable" data-col="name" onclick="sortEvents('name')">Event Name</th>
+              <th class="sortable" data-col="users" onclick="sortEvents('users')" style="width:200px">Unique Users</th>
+              <th class="sortable" data-col="actions" onclick="sortEvents('actions')" style="width:230px">Total Actions</th>
+            </tr>
+          </thead>
+          <tbody id="events-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: ALL JOB TITLES ══ -->
+    <div class="page" id="page-all-titles">
+      <div class="page-header">
+        <div class="page-header-left">
+          <div class="page-title">All Job Titles</div>
+        </div>
+        <div class="header-stats">
+          <div class="hstat">
+            <div class="hstat-val" id="at-kpi-titles">—</div>
+            <div class="hstat-lbl">Unique Titles</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="at-kpi-users">—</div>
+            <div class="hstat-lbl">Total User Views</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="at-kpi-actions">—</div>
+            <div class="hstat-lbl">Total Actions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" id="search-all-titles" type="text" placeholder="Search job titles…" oninput="filterAllTitles()" />
+        </div>
+        <span class="row-count" id="all-titles-count"></span>
+        <label class="toggle-check">
+          <input type="checkbox" id="show-all-titles-action-details" onchange="renderAllTitlesTable()" />
+          <span class="toggle-check-box"></span>
+          Show Action Details
+        </label>
+        <span class="drill-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M14 10l6.1-6.1M9 21H3v-6M10 14l-6.1 6.1"/></svg>
+          Click a row to see congresses
+        </span>
+      </div>
+
+      <div class="table-wrap" id="all-titles-table-wrap" style="overflow-x:auto">
+        <table class="grid-table" id="all-titles-table">
+          <thead id="all-titles-thead"><tr>
+            <th class="col-num">#</th>
+            <th class="sortable" data-col="name" onclick="sortAllTitles('name')">Job Title</th>
+            <th class="sortable" data-col="events" onclick="sortAllTitles('events')" style="width:140px">Total Events</th>
+            <th class="sortable" data-col="users" onclick="sortAllTitles('users')" style="width:160px">Unique Users</th>
+            <th class="sortable" data-col="actions" onclick="sortAllTitles('actions')" style="width:160px">Total Actions</th>
+          </tr></thead>
+          <tbody id="all-titles-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: ALL JOB TITLES → CONGRESSES ══ -->
+    <div class="page" id="page-all-title-events">
+      <div class="page-header">
+        <div class="page-header-left">
+          <button class="back-btn" onclick="goAllTitles()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            All Job Titles
+          </button>
+          <div class="vdivider"></div>
+          <div>
+            <div class="page-title" id="ate-title-name" style="max-width:500px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
+            <div class="page-subtitle">Congress Breakdown</div>
+          </div>
+        </div>
+        <div class="header-stats">
+          <div class="hstat">
+            <div class="hstat-val" id="ate-kpi-events">—</div>
+            <div class="hstat-lbl">Congresses</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="ate-kpi-users">—</div>
+            <div class="hstat-lbl">Unique Users</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="ate-kpi-actions">—</div>
+            <div class="hstat-lbl">Total Actions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" id="search-ate" type="text" placeholder="Search congresses…" oninput="filterAllTitleEvents()" />
+        </div>
+        <span class="row-count" id="ate-count"></span>
+        <label class="toggle-check">
+          <input type="checkbox" id="show-ate-action-details" onchange="renderAllTitleEventsTable()" />
+          <span class="toggle-check-box"></span>
+          Show Action Details
+        </label>
+        <span class="drill-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M14 10l6.1-6.1M9 21H3v-6M10 14l-6.1 6.1"/></svg>
+          Click a row to see users
+        </span>
+      </div>
+
+      <div class="table-wrap" id="ate-table-wrap" style="overflow-x:auto">
+        <table class="grid-table" id="ate-table">
+          <thead id="ate-thead"><tr>
+            <th class="col-num">#</th>
+            <th class="sortable" data-col="name" onclick="sortAte('name')">Congress</th>
+            <th class="sortable" data-col="users" onclick="sortAte('users')" style="width:160px">Unique Users</th>
+            <th class="sortable" data-col="actions" onclick="sortAte('actions')" style="width:160px">Total Actions</th>
+          </tr></thead>
+          <tbody id="ate-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ PAGE 2: TITLES ══ -->
+    <div class="page" id="page-titles">
+      <div class="page-header">
+        <div class="page-header-left">
+          <button class="back-btn" onclick="goHome()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            All Events
+          </button>
+          <div class="vdivider"></div>
+          <div>
+            <div class="page-title" id="titles-event-name"></div>
+            <div class="page-subtitle">Job Title Breakdown</div>
+          </div>
+        </div>
+        <div class="header-stats">
+          <div class="hstat">
+            <div class="hstat-val" id="titles-count-stat">—</div>
+            <div class="hstat-lbl">Titles</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="titles-users-stat">—</div>
+            <div class="hstat-lbl">Unique Users</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="titles-actions-stat">—</div>
+            <div class="hstat-lbl">Total Actions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" id="search-titles" type="text" placeholder="Search job titles…" oninput="filterTitles()" />
+        </div>
+        <label class="toggle-check" id="action-details-toggle">
+          <input type="checkbox" id="show-action-details" onchange="renderTitlesTable()" />
+          <span class="toggle-check-box"></span>
+          Show Action Details
+        </label>
+        <span class="row-count" id="titles-count"></span>
+        <span class="drill-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M14 10l6.1-6.1M9 21H3v-6M10 14l-6.1 6.1"/></svg>
+          Click a row to see users
+        </span>
+      </div>
+
+      <div class="table-wrap" id="titles-table-wrap">
+        <table class="grid-table" id="titles-table">
+          <thead id="titles-thead"><tr>
+            <th class="col-num">#</th>
+            <th class="sortable" data-col="name" onclick="sortTitles('name')">Job Title</th>
+            <th class="sortable" data-col="users" onclick="sortTitles('users')" style="width:160px">Unique Users</th>
+            <th class="sortable" data-col="actions" onclick="sortTitles('actions')" style="width:160px">Total Actions</th>
+          </tr></thead>
+          <tbody id="titles-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ PAGE 3: USERS ══ -->
+    <div class="page" id="page-users">
+      <div class="page-header">
+        <div class="page-header-left">
+          <button class="back-btn" onclick="goToTitles()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Job Titles
+          </button>
+          <div class="vdivider"></div>
+          <div>
+            <div class="page-title" id="users-title-name" style="max-width:500px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
+            <div class="page-subtitle" id="users-event-sub"></div>
+          </div>
+        </div>
+        <div class="header-stats">
+          <div class="hstat">
+            <div class="hstat-val" id="users-count-stat">—</div>
+            <div class="hstat-lbl">Users</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="users-actions-stat">—</div>
+            <div class="hstat-lbl">Total Actions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" id="search-users" type="text" placeholder="Search email…" oninput="filterUsers()" />
+        </div>
+        <span class="row-count" id="users-count"></span>
+        <span class="drill-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M14 10l6.1-6.1M9 21H3v-6M10 14l-6.1 6.1"/></svg>
+          Click a row to see action breakdown
+        </span>
+      </div>
+
+      <div class="table-wrap">
+        <table class="grid-table">
+          <thead>
+            <tr>
+              <th class="col-num">#</th>
+              <th class="sortable" data-col="name" onclick="sortUsers('name')">User Email</th>
+              <th class="sortable" data-col="types" onclick="sortUsers('types')" style="width:160px">Action Types</th>
+              <th class="sortable" data-col="actions" onclick="sortUsers('actions')" style="width:230px">Total Actions</th>
+            </tr>
+          </thead>
+          <tbody id="users-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ══ PAGE 4: ACTIONS ══ -->
+    <div class="page" id="page-actions">
+      <div class="page-header">
+        <div class="page-header-left">
+          <button class="back-btn" onclick="goToUsers()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+            Users
+          </button>
+          <div class="vdivider"></div>
+          <div>
+            <div class="page-title" id="actions-user-email" style="max-width:460px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap"></div>
+            <div class="page-subtitle" id="actions-context-sub"></div>
+          </div>
+        </div>
+        <div class="header-stats">
+          <div class="hstat">
+            <div class="hstat-val" id="actions-count-stat">—</div>
+            <div class="hstat-lbl">Action Types</div>
+          </div>
+          <div class="vdivider"></div>
+          <div class="hstat">
+            <div class="hstat-val" id="actions-total-stat">—</div>
+            <div class="hstat-lbl">Total Actions</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="toolbar">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input class="search-input" id="search-actions" type="text" placeholder="Search actions…" oninput="filterActions()" />
+        </div>
+        <span class="row-count" id="actions-count"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table class="grid-table">
+          <thead>
+            <tr>
+              <th class="col-num">#</th>
+              <th class="sortable" data-col="name" onclick="sortActions('name')">Action</th>
+              <th class="sortable" data-col="actions" onclick="sortActions('actions')" style="width:230px">Count</th>
+            </tr>
+          </thead>
+          <tbody id="actions-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+// ── State ──
+let DB = null;
+let CHART_DATA = null;
+let selectedEvent = null;
+let selectedTitle = null;
+let selectedUser  = null;
+let selectedAllTitle = null;  // for All Job Titles drill-down
+let eventSort    = { col: 'name',    dir: 'asc'  };
+let titleSort    = { col: 'actions', dir: 'desc' };
+let userSort     = { col: 'actions', dir: 'desc' };
+let allTitleSort = { col: 'actions', dir: 'desc' };
+let ateSort      = { col: 'actions', dir: 'desc' };
+let actionSort = { col: 'actions', dir: 'desc' };
+let chartMode = 'stacked';
+let chartSelectedTitle = null;
+let hiddenActions = new Set();
+
+// ── Auth token management ──
+// Token is passed as ?token=<jwt> in the URL (or via postMessage from parent frame).
+// It is stored in memory only — never persisted to disk.
+let AUTH_TOKEN = null;
+
+function getTokenFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('token');
+}
+
+function authHeaders() {
+  if (!AUTH_TOKEN) return {};
+  return { 'Authorization': 'Bearer ' + AUTH_TOKEN };
+}
+
+async function apiFetch(path) {
+  const res = await fetch(path, { headers: authHeaders() });
+  if (res.status === 401 || res.status === 403) {
+    showAuthError('Session Expired', 'Your session token is invalid or has expired. Please re-open the dashboard from Event Cadence.');
+    throw new Error('Unauthorized');
+  }
+  if (!res.ok) throw new Error('API error ' + res.status);
+  return res.json();
+}
+
+function showAuthError(title, msg) {
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('app').style.display = 'none';
+  const el = document.getElementById('auth-error');
+  el.style.display = 'flex';
+  document.getElementById('auth-error-title').textContent = title;
+  document.getElementById('auth-error-msg').textContent   = msg;
+}
+
+// Listen for token passed via postMessage from parent frame
+window.addEventListener('message', (e) => {
+  if (e.data && e.data.type === 'MSD_AUTH_TOKEN' && e.data.token) {
+    AUTH_TOKEN = e.data.token;
+  }
+});
+
+// ── Boot: convert flat API responses back into DB shape ──
+async function boot() {
+  // Pick up token from URL first
+  AUTH_TOKEN = getTokenFromUrl();
+
+  // Verify token (or allow through if REQUIRE_AUTH=false on server)
+  try {
+    await apiFetch('/api/auth/verify');
+  } catch (e) {
+    if (!AUTH_TOKEN) {
+      // No token at all — show access denied
+      showAuthError('Access Denied', 'No authentication token found. Please open the dashboard from Event Cadence.');
+    }
+    return;
+  }
+
+  try {
+    // Fetch all data in parallel
+    const [events, allTitles, chartRaw] = await Promise.all([
+      apiFetch('/api/data/events'),
+      apiFetch('/api/data/titles'),
+      apiFetch('/api/data/chart'),
+    ]);
+
+    // Rebuild DB as nested object (keeps all existing JS logic unchanged)
+    // DB[eventName][titleName] = { unique_users, total_actions, users: {} }
+    // Users/actions are lazy-loaded on drill-down (see selectEvent, selectTitle)
+    DB = {};
+    for (const ev of events) {
+      DB[ev.event_name] = DB[ev.event_name] || {};
+    }
+
+    // Pre-populate title stubs for each event (users loaded lazily)
+    // We need to fetch titles per event to build DB fully for the events page
+    // For the titles page and drill-downs, data is fetched on demand
+    const titlesByEvent = await Promise.all(
+      events.map(ev => apiFetch(`/api/data/events/${encodeURIComponent(ev.event_name)}/titles`)
+        .then(titles => ({ evName: ev.event_name, titles }))
+      )
+    );
+    for (const { evName, titles } of titlesByEvent) {
+      DB[evName] = {};
+      for (const t of titles) {
+        DB[evName][t.title_name] = {
+          unique_users:  t.unique_users,
+          total_actions: t.total_actions,
+          users: {}  // lazy-loaded
+        };
+      }
+    }
+
+    // Build CHART_DATA in expected format
+    CHART_DATA = { labels: chartRaw.titles, datasets: [] };
+    for (const action of chartRaw.actions) {
+      CHART_DATA.datasets = CHART_DATA.datasets || [];
+    }
+    // Store raw chart data for the charts page renderer
+    window._CHART_RAW = chartRaw;
+
+    initDashboard();
+    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('app').style.display = '';
+
+    // Strip token from URL bar (cosmetic — token already in memory)
+    if (window.history && AUTH_TOKEN) {
+      const clean = window.location.pathname + window.location.hash;
+      window.history.replaceState({}, '', clean);
+    }
+  } catch (e) {
+    if (e.message !== 'Unauthorized') {
+      document.getElementById('loading').innerHTML =
+        '<p style="color:#e05a6a">Failed to load data. Please try again.</p>';
+    }
+  }
+}
+
+boot();
+
+// ── Theme ──
+(function() {
+  const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  setThemeIcon(dark ? 'dark' : 'light');
+})();
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  setThemeIcon(next);
+}
+function setThemeIcon(t) {
+  document.getElementById('theme-icon').innerHTML = t === 'dark'
+    ? '<circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>'
+    : '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+}
+
+// ── Helpers ──
+function fmt(n) { return n != null ? Number(n).toLocaleString() : '—'; }
+function emailInitials(email) {
+  const local = email.split('@')[0];
+  const parts = local.split(/[._-]/);
+  if (parts.length >= 2) return (parts[0][0] + parts[1][0]).toUpperCase();
+  return local.slice(0, 2).toUpperCase();
+}
+function initials(name) {
+  const w = name.trim().split(/\s+/);
+  if (w.length === 1) return w[0].slice(0, 2).toUpperCase();
+  return (w[0][0] + w[w.length - 1][0]).toUpperCase();
+}
+function escHtml(s) {
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function escJs(s) {
+  return String(s).replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/\n/g,'\\n').replace(/\r/g,'\\r');
+}
+function sortRows(rows, col, dir) {
+  return rows.slice().sort((a, b) => {
+    let va = a[col], vb = b[col];
+    if (typeof va === 'string') return dir === 'asc' ? va.localeCompare(vb) : vb.localeCompare(va);
+    return dir === 'asc' ? va - vb : vb - va;
+  });
+}
+function updateSortTh(pageId, sortState) {
+  document.getElementById(pageId).querySelectorAll('th[data-col]').forEach(th => {
+    th.classList.remove('sort-asc', 'sort-desc');
+    if (th.dataset.col === sortState.col) th.classList.add('sort-' + sortState.dir);
+  });
+}
+function emptyRow(msg, cols) {
+  return `<tr class="no-click"><td colspan="${cols}"><div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>${msg}</p></div></td></tr>`;
+}
+
+// ── Page 1: Events ──
+function initDashboard() {
+  const evts = Object.entries(DB);
+  // Compute totals: unique_users = sum of unique_users per title per event; total_actions = sum of total_actions per title
+  let totalUsers = 0, totalActions = 0;
+  evts.forEach(([ev, titles]) => {
+    Object.values(titles).forEach(t => {
+      totalUsers   += t.unique_users;
+      totalActions += t.total_actions;
+    });
+  });
+  document.getElementById('kpi-events').textContent        = fmt(evts.length);
+  document.getElementById('kpi-total-users').textContent   = fmt(totalUsers);
+  document.getElementById('kpi-total-actions').textContent = fmt(totalActions);
+  document.getElementById('kpi2-events').textContent  = fmt(evts.length);
+  document.getElementById('kpi2-users').textContent   = fmt(totalUsers);
+  document.getElementById('kpi2-actions').textContent = fmt(totalActions);
+  renderEventsTable();
+}
+
+function getAllActionTypes() {
+  const actionSet = new Set();
+  Object.values(DB).forEach(titles => {
+    Object.values(titles).forEach(tdata => {
+      Object.values(tdata.users).forEach(u => {
+        Object.keys(u.actions).forEach(a => actionSet.add(a));
+      });
+    });
+  });
+  return Array.from(actionSet).sort();
+}
+
+function getEventRows() {
+  return Object.entries(DB).map(([name, titles]) => {
+    const titleArr = Object.values(titles);
+    const users   = titleArr.reduce((s, t) => s + t.unique_users, 0);
+    const actions = titleArr.reduce((s, t) => s + t.total_actions, 0);
+    // Aggregate per-action counts across all titles and users for this event
+    const actionCounts = {};
+    titleArr.forEach(t => {
+      Object.values(t.users).forEach(u => {
+        Object.entries(u.actions).forEach(([a, c]) => {
+          actionCounts[a] = (actionCounts[a] || 0) + c;
+        });
+      });
+    });
+    return { name, users, actions, titleCount: titleArr.length, actionCounts };
+  });
+}
+
+function renderEventsTable() {
+  let rows = getEventRows();
+  const q = document.getElementById('search-events').value.toLowerCase();
+  if (q) rows = rows.filter(r => r.name.toLowerCase().includes(q));
+  rows = sortRows(rows, eventSort.col, eventSort.dir);
+
+  const showDetails = document.getElementById('show-event-action-details').checked;
+  const actionTypes = showDetails ? getAllActionTypes() : [];
+  const colCount = 4 + actionTypes.length;
+
+  // Rebuild thead
+  const thead = document.getElementById('events-thead');
+  const actionHeaderCols = actionTypes.map(a =>
+    `<th style="width:90px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px" title="${escHtml(a)}">${escHtml(a)}</th>`
+  ).join('');
+  thead.innerHTML = `<tr>
+    <th class="col-num">#</th>
+    <th class="sortable" data-col="name" onclick="sortEvents('name')">Event Name</th>
+    <th class="sortable" data-col="users" onclick="sortEvents('users')" style="width:200px">Unique Users</th>
+    <th class="sortable" data-col="actions" onclick="sortEvents('actions')" style="width:230px">Total Actions</th>
+    ${actionHeaderCols}
+  </tr>`;
+  updateSortTh('page-events', eventSort);
+
+  const mxA = Math.max(...rows.map(r => r.actions), 1);
+  const mxU = Math.max(...rows.map(r => r.users), 1);
+  document.getElementById('events-count').textContent = `${rows.length} event${rows.length !== 1 ? 's' : ''}`;
+
+  const tbody = document.getElementById('events-tbody');
+  if (!rows.length) { tbody.innerHTML = emptyRow('No events match your search', colCount); return; }
+
+  // Re-init resize handles after thead rebuild
+  requestAnimationFrame(() => initColResize(document.getElementById('events-table')));
+
+  tbody.innerHTML = rows.map((r, i) => {
+    const actionCols = actionTypes.map(a => {
+      const v = r.actionCounts[a] || 0;
+      return `<td style="text-align:right;font-variant-numeric:tabular-nums;font-size:12px;color:${v ? 'var(--text-primary)' : 'var(--text-faint)'}">${v ? fmt(v) : '—'}</td>`;
+    }).join('');
+    return `
+    <tr onclick="selectEvent('${escJs(r.name)}')"${selectedEvent === r.name ? ' class="selected"' : ''}>
+      <td class="col-num">${i+1}</td>
+      <td>
+        <div class="cell-name">
+          <div class="cell-avatar">${escHtml(initials(r.name))}</div>
+          <div class="cell-name-text">
+            <div class="cell-name-primary">${escHtml(r.name)}</div>
+            <div class="cell-name-sub">${r.titleCount} job title${r.titleCount!==1?'s':''}</div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.users)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.users/mxU*100)}%"></div></div>
+        </div>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.actions)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.actions/mxA*100)}%"></div></div>
+        </div>
+      </td>
+      ${actionCols}
+    </tr>`;
+  }).join('');
+}
+function filterEvents() { renderEventsTable(); }
+function sortEvents(col) {
+  if (eventSort.col === col) eventSort.dir = eventSort.dir==='asc'?'desc':'asc';
+  else { eventSort.col = col; eventSort.dir = col==='name'?'asc':'desc'; }
+  renderEventsTable();
+}
+
+// ── All Job Titles ──
+function goAllTitles() {
+  showPage('all-titles'); updateNav('all-titles');
+  document.getElementById('context-crumbs').style.display = 'none';
+  document.getElementById('crumb-event').style.display = 'none';
+  document.getElementById('crumb-title').style.display = 'none';
+  document.getElementById('crumb-user').style.display = 'none';
+  renderAllTitlesTable();
+}
+
+function getAllTitleRows() {
+  // Roll up all events by title
+  const map = {};
+  Object.entries(DB).forEach(([evName, titles]) => {
+    Object.entries(titles).forEach(([tName, tdata]) => {
+      if (!map[tName]) map[tName] = { name: tName, events: 0, users: 0, actions: 0, actionCounts: {} };
+      map[tName].events  += 1;
+      map[tName].users   += tdata.unique_users;
+      map[tName].actions += tdata.total_actions;
+      Object.values(tdata.users).forEach(u => {
+        Object.entries(u.actions).forEach(([a, c]) => {
+          map[tName].actionCounts[a] = (map[tName].actionCounts[a] || 0) + c;
+        });
+      });
+    });
+  });
+  return Object.values(map);
+}
+
+function renderAllTitlesTable() {
+  let rows = getAllTitleRows();
+  const q = document.getElementById('search-all-titles').value.toLowerCase();
+  if (q) rows = rows.filter(r => r.name.toLowerCase().includes(q));
+  rows = sortRows(rows, allTitleSort.col, allTitleSort.dir);
+
+  // KPIs (only on first render / when no search)
+  const allRows = getAllTitleRows();
+  document.getElementById('at-kpi-titles').textContent  = fmt(allRows.length);
+  document.getElementById('at-kpi-users').textContent   = fmt(allRows.reduce((s,r) => s + r.users, 0));
+  document.getElementById('at-kpi-actions').textContent = fmt(allRows.reduce((s,r) => s + r.actions, 0));
+
+  const showDetails = document.getElementById('show-all-titles-action-details').checked;
+  const actionTypes = showDetails ? getAllActionTypes() : [];
+  const colCount = 5 + actionTypes.length;
+
+  const thead = document.getElementById('all-titles-thead');
+  const actionHeaderCols = actionTypes.map(a =>
+    `<th style="width:90px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px" title="${escHtml(a)}">${escHtml(a)}</th>`
+  ).join('');
+  thead.innerHTML = `<tr>
+    <th class="col-num">#</th>
+    <th class="sortable" data-col="name" onclick="sortAllTitles('name')">Job Title</th>
+    <th class="sortable" data-col="events" onclick="sortAllTitles('events')" style="width:140px">Total Events</th>
+    <th class="sortable" data-col="users" onclick="sortAllTitles('users')" style="width:160px">Unique Users</th>
+    <th class="sortable" data-col="actions" onclick="sortAllTitles('actions')" style="width:160px">Total Actions</th>
+    ${actionHeaderCols}
+  </tr>`;
+  updateSortTh('page-all-titles', allTitleSort);
+
+  const mxA = Math.max(...rows.map(r => r.actions), 1);
+  const mxU = Math.max(...rows.map(r => r.users), 1);
+  document.getElementById('all-titles-count').textContent = `${rows.length} title${rows.length !== 1 ? 's' : ''}`;
+
+  const tbody = document.getElementById('all-titles-tbody');
+  if (!rows.length) { tbody.innerHTML = emptyRow('No titles match your search', colCount); return; }
+
+  requestAnimationFrame(() => initColResize(document.getElementById('all-titles-table')));
+
+  tbody.innerHTML = rows.map((r, i) => {
+    const actionCols = actionTypes.map(a => {
+      const v = r.actionCounts[a] || 0;
+      return `<td style="text-align:right;font-variant-numeric:tabular-nums;font-size:12px;color:${v ? 'var(--text-primary)' : 'var(--text-faint)'}">${v ? fmt(v) : '—'}</td>`;
+    }).join('');
+    return `
+    <tr onclick="selectAllTitle('${escJs(r.name)}')"${selectedAllTitle === r.name ? ' class="selected"' : ''}>
+      <td class="col-num">${i+1}</td>
+      <td>
+        <div class="cell-name">
+          <div class="cell-avatar">${escHtml(initials(r.name))}</div>
+          <div class="cell-name-text">
+            <div class="cell-name-primary">${escHtml(r.name)}</div>
+            <div class="cell-name-sub">${r.events} congress${r.events !== 1 ? 'es' : ''}</div>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:right;font-variant-numeric:tabular-nums">${fmt(r.events)}</td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.users)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.users/mxU*100)}%"></div></div>
+        </div>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.actions)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.actions/mxA*100)}%"></div></div>
+        </div>
+      </td>
+      ${actionCols}
+    </tr>`;
+  }).join('');
+}
+function filterAllTitles() { renderAllTitlesTable(); }
+function sortAllTitles(col) {
+  if (allTitleSort.col === col) allTitleSort.dir = allTitleSort.dir === 'asc' ? 'desc' : 'asc';
+  else { allTitleSort.col = col; allTitleSort.dir = col === 'name' ? 'asc' : 'desc'; }
+  renderAllTitlesTable();
+}
+
+function selectAllTitle(name) {
+  selectedAllTitle = name;
+  goAllTitleEvents();
+}
+
+function goAllTitleEvents() {
+  if (!selectedAllTitle) return;
+  showPage('all-title-events'); updateNav('all-titles');
+
+  // Collect all events this title appears in
+  const rows = [];
+  Object.entries(DB).forEach(([evName, titles]) => {
+    if (!titles[selectedAllTitle]) return;
+    const tdata = titles[selectedAllTitle];
+    const actionCounts = {};
+    Object.values(tdata.users).forEach(u => {
+      Object.entries(u.actions).forEach(([a, c]) => {
+        actionCounts[a] = (actionCounts[a] || 0) + c;
+      });
+    });
+    rows.push({ name: evName, users: tdata.unique_users, actions: tdata.total_actions, actionCounts });
+  });
+
+  document.getElementById('ate-title-name').textContent  = selectedAllTitle;
+  document.getElementById('ate-kpi-events').textContent  = fmt(rows.length);
+  document.getElementById('ate-kpi-users').textContent   = fmt(rows.reduce((s,r) => s + r.users, 0));
+  document.getElementById('ate-kpi-actions').textContent = fmt(rows.reduce((s,r) => s + r.actions, 0));
+
+  // store for re-render
+  window._ateRows = rows;
+  document.getElementById('search-ate').value = '';
+  renderAllTitleEventsTable();
+}
+
+function renderAllTitleEventsTable() {
+  let rows = (window._ateRows || []).slice();
+  const q = document.getElementById('search-ate').value.toLowerCase();
+  if (q) rows = rows.filter(r => r.name.toLowerCase().includes(q));
+  rows = sortRows(rows, ateSort.col, ateSort.dir);
+
+  const showDetails = document.getElementById('show-ate-action-details').checked;
+  // Only show action types present for this title
+  const actionTypes = showDetails ? (() => {
+    const s = new Set();
+    (window._ateRows || []).forEach(r => Object.keys(r.actionCounts).forEach(a => s.add(a)));
+    return Array.from(s).sort();
+  })() : [];
+  const colCount = 4 + actionTypes.length;
+
+  const thead = document.getElementById('ate-thead');
+  const actionHeaderCols = actionTypes.map(a =>
+    `<th style="width:90px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px" title="${escHtml(a)}">${escHtml(a)}</th>`
+  ).join('');
+  thead.innerHTML = `<tr>
+    <th class="col-num">#</th>
+    <th class="sortable" data-col="name" onclick="sortAte('name')">Congress</th>
+    <th class="sortable" data-col="users" onclick="sortAte('users')" style="width:160px">Unique Users</th>
+    <th class="sortable" data-col="actions" onclick="sortAte('actions')" style="width:160px">Total Actions</th>
+    ${actionHeaderCols}
+  </tr>`;
+  updateSortTh('page-all-title-events', ateSort);
+
+  const mxA = Math.max(...rows.map(r => r.actions), 1);
+  const mxU = Math.max(...rows.map(r => r.users), 1);
+  document.getElementById('ate-count').textContent = `${rows.length} congress${rows.length !== 1 ? 'es' : ''}`;
+
+  const tbody = document.getElementById('ate-tbody');
+  if (!rows.length) { tbody.innerHTML = emptyRow('No congresses match your search', colCount); return; }
+
+  requestAnimationFrame(() => initColResize(document.getElementById('ate-table')));
+
+  tbody.innerHTML = rows.map((r, i) => {
+    const actionCols = actionTypes.map(a => {
+      const v = r.actionCounts[a] || 0;
+      return `<td style="text-align:right;font-variant-numeric:tabular-nums;font-size:12px;color:${v ? 'var(--text-primary)' : 'var(--text-faint)'}">${v ? fmt(v) : '—'}</td>`;
+    }).join('');
+    return `
+    <tr onclick="selectAllTitleEvent('${escJs(r.name)}')"${selectedEvent === r.name ? ' class="selected"' : ''}>
+      <td class="col-num">${i+1}</td>
+      <td>
+        <div class="cell-name">
+          <div class="cell-avatar">${escHtml(initials(r.name))}</div>
+          <div class="cell-name-text">
+            <div class="cell-name-primary">${escHtml(r.name)}</div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.users)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.users/mxU*100)}%"></div></div>
+        </div>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.actions)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.actions/mxA*100)}%"></div></div>
+        </div>
+      </td>
+      ${actionCols}
+    </tr>`;
+  }).join('');
+}
+function filterAllTitleEvents() { renderAllTitleEventsTable(); }
+function sortAte(col) {
+  if (ateSort.col === col) ateSort.dir = ateSort.dir === 'asc' ? 'desc' : 'asc';
+  else { ateSort.col = col; ateSort.dir = col === 'name' ? 'asc' : 'desc'; }
+  renderAllTitleEventsTable();
+}
+
+function selectAllTitleEvent(evName) {
+  // Set context so existing Users page works, but back button returns to title's congress list
+  selectedEvent = evName;
+  selectedTitle = selectedAllTitle;
+  selectedUser  = null;
+  // Override the back button on Users page to go back to congress list
+  window._usersBackFn = goAllTitleEvents;
+  goToUsersFromAllTitles();
+}
+
+async function goToUsersFromAllTitles() {
+  if (!selectedEvent || !selectedTitle) return;
+  showPage('users'); updateNav('all-titles');
+  const td = DB[selectedEvent][selectedTitle];
+  document.getElementById('users-title-name').textContent  = selectedTitle;
+  document.getElementById('users-event-sub').textContent   = selectedEvent;
+  document.getElementById('users-actions-stat').textContent = fmt(td.total_actions);
+  // Update back button to return to congress list
+  document.querySelector('#page-users .back-btn').setAttribute('onclick', 'goBackFromUsers()');
+  document.querySelector('#page-users .back-btn').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> ${escHtml(selectedAllTitle)}`;
+  // Lazy-load users from API if not already cached
+  if (Object.keys(td.users).length === 0) {
+    const users = await apiFetch(
+      `/api/data/events/${encodeURIComponent(selectedEvent)}/titles/${encodeURIComponent(selectedTitle)}/users`
+    );
+    td.users = {};
+    for (const u of users) {
+      td.users[u.email] = { total_actions: u.total_actions, action_types: u.action_types, actions: {} };
+    }
+  }
+  document.getElementById('users-count-stat').textContent = fmt(Object.keys(td.users).length);
+  renderUsersTable();
+}
+
+function goBackFromUsers() {
+  // Restore the normal back button label/behavior, then go back
+  document.querySelector('#page-users .back-btn').setAttribute('onclick', 'goToTitles()');
+  document.querySelector('#page-users .back-btn').innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg> Job Titles`;
+  if (window._usersBackFn) { const fn = window._usersBackFn; window._usersBackFn = null; fn(); }
+  else goToTitles();
+}
+
+// ── Page 2: Titles ──
+function selectEvent(name) { selectedEvent = name; selectedTitle = null; selectedUser = null; goToTitles(); }
+
+function goToTitles() {
+  if (!selectedEvent) return;
+  showPage('titles'); updateNav('titles');
+  const titles = DB[selectedEvent];
+  const titleArr = Object.values(titles);
+  const totalU = titleArr.reduce((s,t) => s + t.unique_users, 0);
+  const totalA = titleArr.reduce((s,t) => s + t.total_actions, 0);
+  document.getElementById('titles-event-name').textContent   = selectedEvent;
+  document.getElementById('titles-count-stat').textContent   = fmt(Object.keys(titles).length);
+  document.getElementById('titles-users-stat').textContent   = fmt(totalU);
+  document.getElementById('titles-actions-stat').textContent = fmt(totalA);
+  // sidebar context
+  document.getElementById('context-crumbs').style.display = '';
+  document.getElementById('crumb-event').style.display = '';
+  document.getElementById('crumb-event-name').textContent = selectedEvent;
+  document.getElementById('crumb-title').style.display = 'none';
+  document.getElementById('crumb-user').style.display = 'none';
+  renderTitlesTable();
+}
+
+// Returns the sorted list of action types present in the selected event
+function getEventActionTypes() {
+  if (!selectedEvent) return [];
+  const actionSet = new Set();
+  Object.values(DB[selectedEvent]).forEach(tdata => {
+    Object.values(tdata.users).forEach(u => {
+      Object.keys(u.actions).forEach(a => actionSet.add(a));
+    });
+  });
+  return Array.from(actionSet).sort();
+}
+
+function getTitleRows() {
+  if (!selectedEvent) return [];
+  return Object.entries(DB[selectedEvent]).map(([t, v]) => {
+    // Aggregate per-action counts across all users for this title
+    const actionCounts = {};
+    Object.values(v.users).forEach(u => {
+      Object.entries(u.actions).forEach(([a, c]) => {
+        actionCounts[a] = (actionCounts[a] || 0) + c;
+      });
+    });
+    return {
+      name: t, users: v.unique_users, actions: v.total_actions,
+      userCount: Object.keys(v.users).length,
+      actionCounts
+    };
+  });
+}
+
+function renderTitlesTable() {
+  let rows = getTitleRows();
+  const q = document.getElementById('search-titles').value.toLowerCase();
+  if (q) rows = rows.filter(r => r.name.toLowerCase().includes(q));
+  rows = sortRows(rows, titleSort.col, titleSort.dir);
+
+  const showDetails = document.getElementById('show-action-details').checked;
+  const actionTypes = showDetails ? getEventActionTypes() : [];
+  const colCount = 4 + actionTypes.length;
+
+  // Rebuild thead
+  const thead = document.getElementById('titles-thead');
+  const actionHeaderCols = actionTypes.map(a =>
+    `<th style="width:90px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:90px" title="${escHtml(a)}">${escHtml(a)}</th>`
+  ).join('');
+  thead.innerHTML = `<tr>
+    <th class="col-num">#</th>
+    <th class="sortable" data-col="name" onclick="sortTitles('name')">Job Title</th>
+    <th class="sortable" data-col="users" onclick="sortTitles('users')" style="width:140px">Unique Users</th>
+    <th class="sortable" data-col="actions" onclick="sortTitles('actions')" style="width:140px">Total Actions</th>
+    ${actionHeaderCols}
+  </tr>`;
+  updateSortTh('page-titles', titleSort);
+
+  const mxA = Math.max(...rows.map(r => r.actions), 1);
+  const mxU = Math.max(...rows.map(r => r.users), 1);
+  document.getElementById('titles-count').textContent = `${rows.length} title${rows.length!==1?'s':''}`;
+
+  const tbody = document.getElementById('titles-tbody');
+  if (!rows.length) { tbody.innerHTML = emptyRow('No titles match your search', colCount); return; }
+
+  // Re-init resize handles after thead rebuild
+  requestAnimationFrame(() => initColResize(document.getElementById('titles-table')));
+
+  tbody.innerHTML = rows.map((r, i) => {
+    const actionCols = actionTypes.map(a => {
+      const v = r.actionCounts[a] || 0;
+      return `<td style="text-align:right;font-variant-numeric:tabular-nums;font-size:12px;color:${v ? 'var(--text-primary)' : 'var(--text-faint)'}">${v ? fmt(v) : '—'}</td>`;
+    }).join('');
+    return `
+    <tr onclick="selectTitle('${escJs(r.name)}')"${selectedTitle===r.name?' class="selected"':''}>
+      <td class="col-num">${i+1}</td>
+      <td>
+        <div class="cell-name">
+          <div class="cell-avatar">${escHtml(initials(r.name))}</div>
+          <div class="cell-name-text">
+            <div class="cell-name-primary">${escHtml(r.name)}</div>
+            <div class="cell-name-sub">${r.userCount} user${r.userCount!==1?'s':''}</div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.users)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.users/mxU*100)}%"></div></div>
+        </div>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.actions)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.actions/mxA*100)}%"></div></div>
+        </div>
+      </td>
+      ${actionCols}
+    </tr>`;
+  }).join('');
+}
+function filterTitles() { renderTitlesTable(); }
+function sortTitles(col) {
+  if (titleSort.col === col) titleSort.dir = titleSort.dir==='asc'?'desc':'asc';
+  else { titleSort.col = col; titleSort.dir = col==='name'?'asc':'desc'; }
+  renderTitlesTable();
+}
+
+// ── Page 3: Users ──
+function selectTitle(name) { selectedTitle = name; selectedUser = null; goToUsers(); }
+
+async function goToUsers() {
+  if (!selectedEvent || !selectedTitle) return;
+  showPage('users'); updateNav('users');
+  const td = DB[selectedEvent][selectedTitle];
+  document.getElementById('users-title-name').textContent  = selectedTitle;
+  document.getElementById('users-event-sub').textContent   = selectedEvent;
+  document.getElementById('users-actions-stat').textContent = fmt(td.total_actions);
+  // sidebar
+  document.getElementById('crumb-title').style.display = '';
+  document.getElementById('crumb-title-name').textContent = selectedTitle;
+  document.getElementById('crumb-user').style.display = 'none';
+
+  // Lazy-load users from API if not already cached
+  if (Object.keys(td.users).length === 0) {
+    const users = await apiFetch(
+      `/api/data/events/${encodeURIComponent(selectedEvent)}/titles/${encodeURIComponent(selectedTitle)}/users`
+    );
+    td.users = {};
+    for (const u of users) {
+      td.users[u.email] = { total_actions: u.total_actions, action_types: u.action_types, actions: {} };
+    }
+  }
+  document.getElementById('users-count-stat').textContent = fmt(Object.keys(td.users).length);
+  renderUsersTable();
+}
+
+function getUserRows() {
+  if (!selectedEvent || !selectedTitle) return [];
+  return Object.entries(DB[selectedEvent][selectedTitle].users).map(([email, v]) => ({
+    name: email,
+    actions: v.total_actions,
+    types: v.action_types || Object.keys(v.actions).length
+  }));
+}
+function renderUsersTable() {
+  let rows = getUserRows();
+  const q = document.getElementById('search-users').value.toLowerCase();
+  if (q) rows = rows.filter(r => r.name.toLowerCase().includes(q));
+  rows = sortRows(rows, userSort.col, userSort.dir);
+  updateSortTh('page-users', userSort);
+
+  const mxA = Math.max(...rows.map(r => r.actions), 1);
+  document.getElementById('users-count').textContent = `${rows.length} user${rows.length!==1?'s':''}`;
+
+  const tbody = document.getElementById('users-tbody');
+  if (!rows.length) { tbody.innerHTML = emptyRow('No users match your search', 4); return; }
+  requestAnimationFrame(() => initColResize(document.querySelector('#page-users .grid-table')));
+
+  tbody.innerHTML = rows.map((r, i) => `
+    <tr onclick="selectUser('${escJs(r.name)}')"${selectedUser===r.name?' class="selected"':''}>
+      <td class="col-num">${i+1}</td>
+      <td>
+        <div class="cell-name">
+          <div class="cell-avatar" style="font-size:9px;letter-spacing:-0.5px">${escHtml(emailInitials(r.name))}</div>
+          <div class="cell-name-text">
+            <div class="cell-name-primary">${escHtml(r.name)}</div>
+            <div class="cell-name-sub">${r.types} action type${r.types!==1?'s':''}</div>
+          </div>
+        </div>
+      </td>
+      <td style="text-align:center">
+        <span style="display:inline-block;padding:2px 8px;border-radius:10px;background:var(--accent-light);color:var(--accent);font-size:11px;font-weight:600">${r.types}</span>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.actions)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.actions/mxA*100)}%"></div></div>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+function filterUsers() { renderUsersTable(); }
+function sortUsers(col) {
+  if (userSort.col === col) userSort.dir = userSort.dir==='asc'?'desc':'asc';
+  else { userSort.col = col; userSort.dir = col==='name'?'asc':'desc'; }
+  renderUsersTable();
+}
+
+// ── Page 4: Actions ──
+function selectUser(email) { selectedUser = email; goToActions(); }
+
+async function goToActions() {
+  if (!selectedEvent || !selectedTitle || !selectedUser) return;
+  showPage('actions'); updateNav('actions');
+  const ud = DB[selectedEvent][selectedTitle].users[selectedUser];
+  document.getElementById('actions-user-email').textContent  = selectedUser;
+  document.getElementById('actions-context-sub').textContent = selectedTitle + ' · ' + selectedEvent;
+  document.getElementById('actions-total-stat').textContent  = fmt(ud.total_actions);
+  // sidebar
+  document.getElementById('crumb-user').style.display = '';
+  document.getElementById('crumb-user-name').textContent = selectedUser;
+
+  // Lazy-load actions from API if not already cached
+  if (Object.keys(ud.actions).length === 0) {
+    const actions = await apiFetch(
+      `/api/data/events/${encodeURIComponent(selectedEvent)}/titles/${encodeURIComponent(selectedTitle)}/users/${encodeURIComponent(selectedUser)}/actions`
+    );
+    ud.actions = {};
+    for (const a of actions) {
+      ud.actions[a.action] = a.count;
+    }
+  }
+  document.getElementById('actions-count-stat').textContent = fmt(Object.keys(ud.actions).length);
+  renderActionsTable();
+}
+
+function getActionRows() {
+  if (!selectedEvent || !selectedTitle || !selectedUser) return [];
+  return Object.entries(DB[selectedEvent][selectedTitle].users[selectedUser].actions).map(([a, count]) => ({
+    name: a, actions: count
+  }));
+}
+function renderActionsTable() {
+  let rows = getActionRows();
+  const q = document.getElementById('search-actions').value.toLowerCase();
+  if (q) rows = rows.filter(r => r.name.toLowerCase().includes(q));
+  rows = sortRows(rows, actionSort.col, actionSort.dir);
+  updateSortTh('page-actions', actionSort);
+
+  const mxA = Math.max(...rows.map(r => r.actions), 1);
+  document.getElementById('actions-count').textContent = `${rows.length} action type${rows.length!==1?'s':''}`;
+
+  const tbody = document.getElementById('actions-tbody');
+  if (!rows.length) { tbody.innerHTML = emptyRow('No actions match your search', 3); return; }
+  requestAnimationFrame(() => initColResize(document.querySelector('#page-actions .grid-table')));
+
+  tbody.innerHTML = rows.map((r, i) => `
+    <tr class="no-click">
+      <td class="col-num">${i+1}</td>
+      <td>
+        <div class="cell-name">
+          <div class="cell-avatar" style="background:var(--divider);color:var(--text-muted);font-size:10px">${i+1}</div>
+          <div class="cell-name-text">
+            <div class="cell-name-primary" style="color:var(--text-primary)">${escHtml(r.name)}</div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div class="bar-cell">
+          <span class="bar-num">${fmt(r.actions)}</span>
+          <div class="bar-track"><div class="bar-fill" style="width:${Math.round(r.actions/mxA*100)}%"></div></div>
+        </div>
+      </td>
+    </tr>`).join('');
+}
+function filterActions() { renderActionsTable(); }
+function sortActions(col) {
+  if (actionSort.col === col) actionSort.dir = actionSort.dir==='asc'?'desc':'asc';
+  else { actionSort.col = col; actionSort.dir = col==='name'?'asc':'desc'; }
+  renderActionsTable();
+}
+
+// ── Charts Page ──
+const ACTION_COLORS = [
+  '#2d6a6f','#4ab0b8','#7dd4da','#9b7fc7','#c4a9e8',
+  '#e8923a','#f5b97a','#e05a6a','#f093a0','#5aac7a',
+  '#8fd4a8','#3b78c4','#7aaee8','#d4a843','#efd08a',
+  '#8fa0b0','#b8c8d8','#c46a3b','#e09a7a','#6a6acf',
+  '#a0a0e8','#3db08a','#70d4b0','#cf6aa0'
+];
+
+function goCharts() {
+  showPage('charts');
+  ['events','titles','users','actions','charts'].forEach(id => {
+    const el = document.getElementById('nav-' + id);
+    if (!el) return;
+    el.classList.toggle('active', id === 'charts');
+    if (id !== 'events' && id !== 'charts') el.style.display = 'none';
+  });
+  document.getElementById('context-crumbs').style.display = 'none';
+  selectedEvent = null; selectedTitle = null; selectedUser = null;
+  if (!CHART_DATA) return;
+  initChartsPage();
+}
+
+function initChartsPage() {
+  const { titles, actions } = CHART_DATA;
+  document.getElementById('chart-kpi-titles').textContent  = fmt(titles.length);
+  document.getElementById('chart-kpi-actions').textContent = fmt(actions.length);
+  renderChartTitleList();
+  renderChartLegend();
+  renderChart();
+}
+
+function filterChartTitles() { renderChartTitleList(); renderChart(); }
+
+function getVisibleChartTitles() {
+  const q = document.getElementById('search-chart-titles').value.toLowerCase();
+  let list = CHART_DATA.titles.slice().sort((a, b) => a.name.localeCompare(b.name));
+  if (q) list = list.filter(t => t.name.toLowerCase().includes(q));
+  return list;
+}
+
+function renderChartTitleList() {
+  const visible = getVisibleChartTitles();
+  document.getElementById('chart-title-count').textContent =
+    visible.length + ' title' + (visible.length !== 1 ? 's' : '');
+  const html = visible.map(t => `
+    <div class="chart-title-item${chartSelectedTitle === t.name ? ' selected' : ''}"
+         onclick="selectChartTitle('${escJs(t.name)}')">
+      <div class="chart-title-item-text">
+        <div class="chart-title-item-name">${escHtml(t.name)}</div>
+      </div>
+      <div class="chart-title-item-total">${fmt(t.total)}</div>
+    </div>`).join('');
+  document.getElementById('chart-title-list').innerHTML = html;
+}
+
+function selectChartTitle(name) {
+  chartSelectedTitle = chartSelectedTitle === name ? null : name;
+  renderChartTitleList();
+  renderChart();
+  document.getElementById('chart-viewing-label').textContent =
+    chartSelectedTitle ? chartSelectedTitle : 'All visible titles';
+}
+
+function setChartMode(mode) {
+  chartMode = mode;
+  document.getElementById('btn-stacked').classList.toggle('active', mode === 'stacked');
+  document.getElementById('btn-pct').classList.toggle('active',    mode === 'pct');
+  renderChart();
+}
+
+function renderChart() {
+  if (!CHART_DATA) return;
+  const { actions } = CHART_DATA;
+  let titles;
+  if (chartSelectedTitle) {
+    const found = CHART_DATA.titles.find(t => t.name === chartSelectedTitle);
+    titles = found ? [found] : [];
+  } else {
+    titles = getVisibleChartTitles();
+  }
+  const activeActions = actions.filter((_, i) => !hiddenActions.has(i));
+  const maxTotal = Math.max(...titles.map(t =>
+    activeActions.reduce((s, a) => s + t.values[actions.indexOf(a)], 0)
+  ), 1);
+
+  const rows = titles.map(t => {
+    const activeVals = actions.map((a, i) => hiddenActions.has(i) ? 0 : t.values[i]);
+    const total = activeVals.reduce((s, v) => s + v, 0);
+    const denom = chartMode === 'pct' ? (total || 1) : maxTotal;
+    const segs = actions.map((a, i) => {
+      if (hiddenActions.has(i)) return '';
+      const v = t.values[i];
+      if (!v) return '';
+      const w = (v / denom * 100).toFixed(2);
+      return `<div class="chart-row-bar-seg"
+        style="width:${w}%;background:${ACTION_COLORS[i % ACTION_COLORS.length]}"
+        data-action="${escHtml(a)}" data-val="${v}" data-title="${escHtml(t.name)}"
+        onmouseenter="showTip(event,'${escJs(a)}',${v},'${escJs(t.name)}')"
+        onmouseleave="hideTip()"></div>`;
+    }).join('');
+    return `
+      <div class="chart-row">
+        <div class="chart-row-label" title="${escHtml(t.name)}">${escHtml(t.name)}</div>
+        <div class="chart-row-bar">${segs}</div>
+        <div class="chart-row-total">${fmt(total)}</div>
+      </div>`;
+  }).join('');
+
+  document.getElementById('chart-bars').innerHTML =
+    rows || '<div style="padding:32px;color:var(--text-muted);font-size:13px">No data to display.</div>';
+}
+
+function renderChartLegend() {
+  const { actions } = CHART_DATA;
+  const html = actions.map((a, i) => `
+    <div class="legend-item${hiddenActions.has(i) ? ' dimmed' : ''}"
+         onclick="toggleActionFilter(${i})">
+      <div class="legend-dot" style="background:${ACTION_COLORS[i % ACTION_COLORS.length]}"></div>
+      ${escHtml(a)}
+    </div>`).join('');
+  document.getElementById('chart-legend').innerHTML = html;
+}
+
+function toggleActionFilter(idx) {
+  if (hiddenActions.has(idx)) hiddenActions.delete(idx);
+  else hiddenActions.add(idx);
+  renderChartLegend();
+  renderChart();
+}
+
+function showTip(e, action, val, title) {
+  const tip = document.getElementById('chart-tooltip');
+  tip.innerHTML = `<strong>${escHtml(action)}</strong>: ${fmt(val)}<br><span style="opacity:.75;font-size:11px">${escHtml(title)}</span>`;
+  tip.classList.remove('hidden');
+  moveTip(e);
+  document.addEventListener('mousemove', moveTip);
+}
+function moveTip(e) {
+  const tip = document.getElementById('chart-tooltip');
+  tip.style.left = (e.clientX + 12) + 'px';
+  tip.style.top  = (e.clientY - 8)  + 'px';
+}
+function hideTip() {
+  document.getElementById('chart-tooltip').classList.add('hidden');
+  document.removeEventListener('mousemove', moveTip);
+}
+
+// ── Navigation ──
+function goHome() {
+  selectedEvent = null; selectedTitle = null; selectedUser = null;
+  showPage('events'); updateNav('events');
+  document.getElementById('context-crumbs').style.display = 'none';
+  document.getElementById('crumb-event').style.display = 'none';
+  document.getElementById('crumb-title').style.display = 'none';
+  document.getElementById('crumb-user').style.display = 'none';
+  document.getElementById('search-events').value = '';
+  renderEventsTable();
+}
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+}
+function updateNav(active) {
+  const drilling = ['titles','users','actions'].includes(active);
+  ['events','titles','users','actions','charts','all-titles'].forEach(id => {
+    const el = document.getElementById('nav-' + id);
+    if (!el) return;
+    el.classList.toggle('active', id === active);
+    if (id === 'titles' || id === 'users' || id === 'actions') {
+      el.style.display = drilling ? '' : 'none';
+    }
+  });
+}
+</script>
+
+<!-- ─── AI CHAT FAB + PANEL ─── -->
+<button id="chat-fab" onclick="toggleChat()" aria-label="Ask AI about this data">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+    <path d="M8 10h8M8 14h5"/>
+  </svg>
+</button>
+
+<div id="chat-panel">
+  <div class="chat-header">
+    <div class="chat-header-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+      </svg>
+    </div>
+    <div>
+      <div class="chat-header-title">Ask about the data</div>
+      <div class="chat-header-sub">Powered by Claude AI · 2025 data</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+  </div>
+
+  <div class="chat-messages" id="chat-messages">
+    <div class="chat-msg assistant">Hi! Ask me anything about the MSD congress activity data — events, job titles, action patterns, or user behavior trends.</div>
+  </div>
+
+  <div class="chat-suggestions" id="chat-suggestions">
+    <button class="chat-suggestion" onclick="askSuggestion(this)">Where do Clinical Directors use the app most?</button>
+    <button class="chat-suggestion" onclick="askSuggestion(this)">Which events had the highest engagement?</button>
+    <button class="chat-suggestion" onclick="askSuggestion(this)">What are the most used features?</button>
+    <button class="chat-suggestion" onclick="askSuggestion(this)">Which titles use Speakers the most?</button>
+    <button class="chat-suggestion" onclick="askSuggestion(this)">Compare ASCO vs ESMO activity</button>
+  </div>
+
+  <div class="chat-input-row">
+    <textarea id="chat-input" placeholder="Ask a question about the data…" rows="1"
+      oninput="autoResize(this)" onkeydown="chatKeydown(event)"></textarea>
+    <button id="chat-send" onclick="sendChat()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <path d="M22 2 11 13M22 2 15 22l-4-9-9-4 20-7z"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<script>
+// ── Column Resize ──
+function initColResize(table) {
+  if (!table) return;
+  const ths = Array.from(table.querySelectorAll('thead th'));
+  ths.forEach((th, i) => {
+    // Remove any existing resizer
+    const old = th.querySelector('.col-resizer');
+    if (old) old.remove();
+    // Last column gets no handle (nothing to its right)
+    if (i === ths.length - 1) return;
+    // Fix the column width to its current rendered width so dragging works
+    if (!th.style.width) th.style.width = th.offsetWidth + 'px';
+    const handle = document.createElement('div');
+    handle.className = 'col-resizer';
+    th.appendChild(handle);
+    handle.addEventListener('mousedown', e => {
+      e.preventDefault();
+      const startX = e.clientX;
+      const startW = th.offsetWidth;
+      handle.classList.add('dragging');
+      document.body.classList.add('col-resizing');
+      function onMove(e) {
+        const newW = Math.max(20, startW + e.clientX - startX);
+        th.style.width = newW + 'px';
+      }
+      function onUp() {
+        handle.classList.remove('dragging');
+        document.body.classList.remove('col-resizing');
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      }
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    });
+  });
+}
+
+// ── Chat ──
+let chatOpen = false;
+let chatHistory = [];
+let chatBusy = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  document.getElementById('chat-panel').classList.toggle('open', chatOpen);
+  if (chatOpen) {
+    setTimeout(() => document.getElementById('chat-input').focus(), 220);
+  }
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 100) + 'px';
+}
+
+function chatKeydown(e) {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendChat();
+  }
+}
+
+function askSuggestion(btn) {
+  const text = btn.textContent.trim();
+  document.getElementById('chat-input').value = text;
+  // Hide suggestions after first use
+  document.getElementById('chat-suggestions').style.display = 'none';
+  sendChat();
+}
+
+function addChatMsg(role, text) {
+  const msgs = document.getElementById('chat-messages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + role;
+  div.textContent = text;
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  return div;
+}
+
+async function sendChat() {
+  if (chatBusy) return;
+  const input = document.getElementById('chat-input');
+  const text = input.value.trim();
+  if (!text) return;
+
+  chatBusy = true;
+  document.getElementById('chat-send').disabled = true;
+  document.getElementById('chat-suggestions').style.display = 'none';
+
+  // Add user message
+  input.value = '';
+  input.style.height = 'auto';
+  addChatMsg('user', text);
+  chatHistory.push({ role: 'user', content: text });
+
+  // Typing indicator
+  const typing = addChatMsg('typing', 'Thinking…');
+
+  try {
+    const res = await fetch('/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', ...authHeaders() },
+      body: JSON.stringify({ messages: chatHistory })
+    });
+    const data = await res.json();
+    typing.remove();
+
+    if (data.error) {
+      addChatMsg('error', 'Error: ' + data.error);
+    } else {
+      addChatMsg('assistant', data.answer);
+      chatHistory.push({ role: 'assistant', content: data.answer });
+    }
+  } catch (err) {
+    typing.remove();
+    addChatMsg('error', 'Could not reach the AI server. Please try again.');
+  }
+
+  chatBusy = false;
+  document.getElementById('chat-send').disabled = false;
+  document.getElementById('chat-input').focus();
+}
+</script>
+</body>
+</html>
