@@ -12,22 +12,19 @@ ENV_ID="adf3963e-554e-4317-b338-d0c07e185934"
 RAILWAY_URL="https://ingenious-creation-production-721f.up.railway.app"
 PROD_URL="https://docs.incadence.com/msd/activityDashboard"
 
-# Staging env (set these once staging service is created)
-STAGING_ENV_ID=""
-STAGING_SERVICE_ID=""
+# Staging env
+STAGING_ENV_ID="b5034bb3-fb61-480f-ba81-ddcce9fe7613"
+STAGING_SERVICE_ID="7b96205d-9685-46a0-aea5-ac36e2c9afaf"
+STAGING_URL="https://msd-staging-staging.up.railway.app"
 
 TARGET="${2:-production}"
 MSG="${1:-Update dashboard}"
 
 # Pick service based on target
 if [ "$TARGET" = "staging" ]; then
-  if [ -z "$STAGING_SERVICE_ID" ] || [ -z "$STAGING_ENV_ID" ]; then
-    echo "✗ Staging service not yet configured. Edit deploy.sh to set STAGING_SERVICE_ID and STAGING_ENV_ID."
-    exit 1
-  fi
   SERVICE_ID="$STAGING_SERVICE_ID"
   DEPLOY_ENV_ID="$STAGING_ENV_ID"
-  echo "==> Deploying to STAGING..."
+  echo "==> Deploying to STAGING ($STAGING_URL)..."
 else
   SERVICE_ID="b638ab97-dea6-4c1c-a2e2-2385007579bd"
   DEPLOY_ENV_ID="$ENV_ID"
@@ -37,7 +34,11 @@ fi
 echo "==> Committing and pushing to GitHub..."
 git add -A
 git commit -m "$MSG" || echo "(nothing to commit)"
-GIT_ASKPASS=/bin/true git push origin master
+if [ "$TARGET" = "staging" ]; then
+  GIT_ASKPASS=/bin/true git push origin HEAD:staging
+else
+  GIT_ASKPASS=/bin/true git push origin master
+fi
 
 echo "==> Triggering Railway redeploy on service $SERVICE_ID..."
 RESULT=$(curl -s -X POST https://backboard.railway.app/graphql/v2 \
@@ -74,8 +75,12 @@ else:
   if echo "$STATUS" | grep -q "SUCCESS"; then
     echo ""
     echo "✓ Deployed successfully!"
-    echo "  Railway: $RAILWAY_URL"
-    echo "  Production: $PROD_URL"
+    if [ "$TARGET" = "staging" ]; then
+      echo "  Staging: $STAGING_URL"
+    else
+      echo "  Railway: $RAILWAY_URL"
+      echo "  Production: $PROD_URL"
+    fi
     exit 0
   fi
   if echo "$STATUS" | grep -q "FAILED\|CRASHED"; then
