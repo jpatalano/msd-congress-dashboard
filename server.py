@@ -45,7 +45,10 @@ JWT_ALGORITHM = "HS256"
 REQUIRE_AUTH  = os.environ.get("REQUIRE_AUTH", "true").lower() != "false"
 
 # ── App setup ──────────────────────────────────────────────────────────────
-app = FastAPI(title="MSD Congress Activity Dashboard API")
+# root_path makes FastAPI aware it is mounted under a subpath when behind a
+# reverse-proxy or when the domain serves the app at /msd/activityDashboard.
+ROOT_PATH = os.environ.get("ROOT_PATH", "/msd/activityDashboard")
+app = FastAPI(title="MSD Congress Activity Dashboard API", root_path=ROOT_PATH)
 
 app.add_middleware(
     CORSMiddleware,
@@ -379,4 +382,8 @@ async def chat(request: Request):
 
 
 # ── Static files (must be last) ────────────────────────────────────────────
+# Serve static files at root.  FastAPI's root_path prefix is applied
+# automatically by the ASGI server for the OpenAPI docs; the static file
+# mount stays at "/" so Railway can serve index.html from the domain root
+# while nginx on docs.incadence.com proxies /msd/activityDashboard/ → here.
 app.mount("/", StaticFiles(directory=str(BASE), html=True), name="static")

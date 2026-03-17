@@ -1687,6 +1687,26 @@ let chartMode = 'stacked';
 let chartSelectedTitle = null;
 let hiddenActions = new Set();
 
+// ── Base path (for subpath deployments like /msd/activityDashboard) ──
+// Reads the <base> tag href if present, otherwise falls back to the path
+// prefix of the current URL (strips any trailing filename).  This lets the
+// dashboard work both at / (Railway raw URL) and at /msd/activityDashboard
+// (when proxied through docs.incadence.com).
+const BASE_PATH = (function() {
+  const base = document.querySelector('base');
+  if (base && base.href) {
+    // e.g. https://docs.incadence.com/msd/activityDashboard/
+    try {
+      const u = new URL(base.href);
+      return u.pathname.replace(/\/$/, '');  // strip trailing slash
+    } catch(e) {}
+  }
+  // Derive from current URL pathname (strip filename if any)
+  const p = window.location.pathname;
+  const last = p.split('/').pop();
+  return last && last.includes('.') ? p.substring(0, p.lastIndexOf('/')) : p.replace(/\/$/, '');
+})();
+
 // ── Auth token management ──
 // Token is passed as ?token=<jwt> in the URL (or via postMessage from parent frame).
 // It is stored in memory only — never persisted to disk.
@@ -1703,7 +1723,9 @@ function authHeaders() {
 }
 
 async function apiFetch(path) {
-  const res = await fetch(path, { headers: authHeaders() });
+  // Prepend BASE_PATH so API calls work under any subpath deployment.
+  const fullPath = BASE_PATH ? BASE_PATH + path : path;
+  const res = await fetch(fullPath, { headers: authHeaders() });
   if (res.status === 401 || res.status === 403) {
     showAuthError('Session Expired', 'Your session token is invalid or has expired. Please re-open the dashboard from Event Cadence.');
     throw new Error('Unauthorized');
@@ -2852,7 +2874,7 @@ async function sendChat() {
   const typing = addChatMsg('typing', 'Thinking…');
 
   try {
-    const res = await fetch('/api/chat', {
+    const res = await fetch(BASE_PATH + '/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', ...authHeaders() },
       body: JSON.stringify({ messages: chatHistory })

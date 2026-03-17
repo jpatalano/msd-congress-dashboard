@@ -4,5 +4,6 @@ builder = "nixpacks"
 [deploy]
 startCommand = "uvicorn server:app --host 0.0.0.0 --port $PORT"
 healthcheckPath = "/api/auth/verify"
+rootDirectory = "."
 healthcheckTimeout = 30
 restartPolicyType = "on_failure"
