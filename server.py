@@ -94,6 +94,13 @@ def verify_token(credentials: Optional[HTTPAuthorizationCredentials] = Depends(b
             headers={"WWW-Authenticate": "Bearer"},
         )
 
+# ── Health check endpoint (no auth, for Railway/load balancers) ─────────────────
+@app.get("/health")
+async def health_check():
+    """Simple health check that always returns 200. Used by Railway's healthcheck."""
+    return {"status": "ok"}
+
+
 # ── Token verification endpoint (for client bootstrap) ────────────────────
 @app.get("/api/auth/verify")
 async def auth_verify(token_payload: dict = Depends(verify_token)):
