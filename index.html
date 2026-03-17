@@ -1785,12 +1785,14 @@ async function boot() {
     // Pre-populate title stubs for each event (users loaded lazily)
     // We need to fetch titles per event to build DB fully for the events page
     // For the titles page and drill-downs, data is fetched on demand
-    const titlesByEvent = await Promise.all(
+    const titlesByEvent = await Promise.allSettled(
       events.map(ev => apiFetch(`/api/data/events/${encodeURIComponent(ev.event_name)}/titles`)
         .then(titles => ({ evName: ev.event_name, titles }))
       )
     );
-    for (const { evName, titles } of titlesByEvent) {
+    for (const result of titlesByEvent) {
+      if (result.status !== 'fulfilled') continue;
+      const { evName, titles } = result.value;
       DB[evName] = {};
       for (const t of titles) {
         DB[evName][t.title_name] = {

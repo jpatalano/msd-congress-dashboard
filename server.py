@@ -130,7 +130,7 @@ async def get_events(token_payload: dict = Depends(verify_token)):
     return [dict(r) for r in rows]
 
 
-@app.get("/api/data/events/{event_name}/titles")
+@app.get("/api/data/events/{event_name:path}/titles")
 async def get_titles(event_name: str, token_payload: dict = Depends(verify_token)):
     """All job titles for a given event."""
     with get_db() as con:
@@ -152,7 +152,7 @@ async def get_titles(event_name: str, token_payload: dict = Depends(verify_token
     return [dict(r) for r in rows]
 
 
-@app.get("/api/data/events/{event_name}/titles/{title_name}/users")
+@app.get("/api/data/events/{event_name:path}/titles/{title_name}/users")
 async def get_users(event_name: str, title_name: str, token_payload: dict = Depends(verify_token)):
     """All users for a given event + title."""
     with get_db() as con:
@@ -174,7 +174,7 @@ async def get_users(event_name: str, title_name: str, token_payload: dict = Depe
     return [dict(r) for r in rows]
 
 
-@app.get("/api/data/events/{event_name}/titles/{title_name}/users/{email}/actions")
+@app.get("/api/data/events/{event_name:path}/titles/{title_name}/users/{email}/actions")
 async def get_user_actions(
     event_name: str, title_name: str, email: str,
     token_payload: dict = Depends(verify_token)
@@ -237,7 +237,7 @@ async def get_action_types(token_payload: dict = Depends(verify_token)):
     return [r["action"] for r in rows]
 
 
-@app.get("/api/data/events/{event_name}/action-counts")
+@app.get("/api/data/events/{event_name:path}/action-counts")
 async def get_event_action_counts(event_name: str, token_payload: dict = Depends(verify_token)):
     """Per-action totals for a given event (for Show Action Details)."""
     with get_db() as con:
@@ -254,7 +254,7 @@ async def get_event_action_counts(event_name: str, token_payload: dict = Depends
     return {r["action"]: r["total"] for r in rows}
 
 
-@app.get("/api/data/events/{event_name}/titles/{title_name}/action-counts")
+@app.get("/api/data/events/{event_name:path}/titles/{title_name}/action-counts")
 async def get_title_action_counts(
     event_name: str, title_name: str,
     token_payload: dict = Depends(verify_token)
