@@ -1802,13 +1802,17 @@ async function boot() {
       }
     }
 
-    // Build CHART_DATA in expected format
-    CHART_DATA = { labels: chartRaw.titles, datasets: [] };
-    for (const action of chartRaw.actions) {
-      CHART_DATA.datasets = CHART_DATA.datasets || [];
-    }
-    // Store raw chart data for the charts page renderer
-    window._CHART_RAW = chartRaw;
+    // Build CHART_DATA in the format expected by initChartsPage/renderChart:
+    // { titles: [{name, total, values:[]}], actions: ['Action A', ...] }
+    CHART_DATA = {
+      actions: chartRaw.actions,
+      titles: chartRaw.titles.map(titleName => {
+        const row = chartRaw.data[titleName] || {};
+        const values = chartRaw.actions.map(a => row[a] || 0);
+        const total = values.reduce((s, v) => s + v, 0);
+        return { name: titleName, total, values };
+      })
+    };
 
     initDashboard();
     document.getElementById('loading').classList.add('hidden');
@@ -2647,12 +2651,7 @@ const ACTION_COLORS = [
 
 function goCharts() {
   showPage('charts');
-  ['events','titles','users','actions','charts'].forEach(id => {
-    const el = document.getElementById('nav-' + id);
-    if (!el) return;
-    el.classList.toggle('active', id === 'charts');
-    if (id !== 'events' && id !== 'charts') el.style.display = 'none';
-  });
+  updateNav('charts');
   document.getElementById('context-crumbs').style.display = 'none';
   selectedEvent = null; selectedTitle = null; selectedUser = null;
   if (!CHART_DATA) return;
@@ -2801,7 +2800,7 @@ function showPage(name) {
 }
 function updateNav(active) {
   const drilling = ['titles','users','actions'].includes(active);
-  ['events','titles','users','actions','charts','all-titles'].forEach(id => {
+  ['events','all-titles','charts','titles','users','actions'].forEach(id => {
     const el = document.getElementById('nav-' + id);
     if (!el) return;
     el.classList.toggle('active', id === active);
